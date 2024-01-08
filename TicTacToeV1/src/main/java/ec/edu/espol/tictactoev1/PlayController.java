@@ -12,6 +12,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -88,7 +89,9 @@ public class PlayController implements Initializable {
     private String obtenerImagenParaJugadorActual() {
         if (juego.getJugadorActual().getSimbolo() == GameSimbol.X) {
             juego.cambiarJugador();
+
             System.out.println("El jugador actual es:" + juego.getJugadorActual().getNombre());
+
             return "Equis.png";
         } else {
             juego.cambiarJugador();
@@ -110,9 +113,18 @@ public class PlayController implements Initializable {
     private void mostrarResultadoDelJuego() {
         if (juego.getGameState() == GameState.WIN_X || juego.getGameState() == GameState.WIN_O) {
             System.out.println("¡" + juego.getJugadorActual().getNombre() + " ha ganado!");
-            
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText("¿Desea volver a jugar?");
+            alert.show();
         } else if (juego.getGameState() == GameState.DRAW) {
             System.out.println("¡El juego ha terminado en empate!");
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText("¿Desea volver a jugar?");
+            alert.show();
         }
+    }
+
+    private void jugarDeNuevo() {
+
     }
 }
