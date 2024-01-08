@@ -110,6 +110,7 @@ public class PlayController implements Initializable {
     private void mostrarResultadoDelJuego() {
         if (juego.getGameState() == GameState.WIN_X || juego.getGameState() == GameState.WIN_O) {
             System.out.println("¡" + juego.getJugadorActual().getNombre() + " ha ganado!");
+            
         } else if (juego.getGameState() == GameState.DRAW) {
             System.out.println("¡El juego ha terminado en empate!");
         }
