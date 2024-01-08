@@ -27,6 +27,8 @@ public class InicioController implements Initializable {
     private Button buttonPlay;
     @FXML
     private Button buttonDifficult;
+    @FXML
+    private Button guardadasbtn;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -39,6 +41,14 @@ public class InicioController implements Initializable {
     private void difficult(MouseEvent evt) {
         try {
             App.setRoot("dificultad");
+        } catch (IOException ex) {
+        }
+    }
+    
+     @FXML
+    private void guardadas(MouseEvent evt) {
+        try {
+            App.setRoot("guardadas");
         } catch (IOException ex) {
         }
     }
