@@ -113,18 +113,16 @@ public class PlayController implements Initializable {
     private void mostrarResultadoDelJuego() {
         if (juego.getGameState() == GameState.WIN_X || juego.getGameState() == GameState.WIN_O) {
             System.out.println("¡" + juego.getJugadorActual().getNombre() + " ha ganado!");
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setContentText("¿Desea volver a jugar?");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("¡" + juego.getJugadorActual().getNombre() + " ha ganado!");
             alert.show();
         } else if (juego.getGameState() == GameState.DRAW) {
             System.out.println("¡El juego ha terminado en empate!");
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setContentText("¿Desea volver a jugar?");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("¡El juego ha terminado en empate!");
             alert.show();
         }
     }
 
-    private void jugarDeNuevo() {
-
-    }
+   
 }
