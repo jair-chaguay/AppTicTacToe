@@ -17,24 +17,21 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
-
 public class PlayController implements Initializable {
 
     private TicTacToe juego;
-    
-    
+
     @FXML
     private Pane background;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        
+
         Jugadorr jugador1 = new Jugadorr("Jugador1", GameSimbol.X);
         Jugadorr jugador2 = new Jugadorr("Jugador2", GameSimbol.O);
         juego = new TicTacToe(jugador1, jugador2);
         crearCuadros();
-        
+
     }
 
     @FXML
@@ -90,8 +87,13 @@ public class PlayController implements Initializable {
 
     private String obtenerImagenParaJugadorActual() {
         if (juego.getJugadorActual().getSimbolo() == GameSimbol.X) {
+            juego.cambiarJugador();
+            System.out.println("El jugador actual es:" + juego.getJugadorActual().getNombre());
             return "Equis.png";
         } else {
+            juego.cambiarJugador();
+            System.out.println("El jugador actual es:" + juego.getJugadorActual().getNombre());
+
             return "Circulo.png";
         }
     }
