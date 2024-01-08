@@ -34,15 +34,14 @@ public class PlayController implements Initializable {
     private TicTacToe juego;
     @FXML
     ImageView imgws;
-
+    
     @FXML
     private Pane background;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
-        Image a = new Image(App.pathImages + "Circulo.png");
-        imgws.setImage(a);
+        
+        
         Jugadorr jugador1 = new Jugadorr("Jugador1", GameSimbol.X);
         Jugadorr jugador2 = new Jugadorr("Jugador2", GameSimbol.O);
         juego = new TicTacToe(jugador1, jugador2);
@@ -118,7 +117,6 @@ public class PlayController implements Initializable {
     }
 
     private void mostrarResultadoDelJuego() {
-        // Ejemplo de cómo mostrar el resultado del juego
         if (juego.getGameState() == GameState.WIN_X || juego.getGameState() == GameState.WIN_O) {
             System.out.println("¡" + juego.getJugadorActual().getNombre() + " ha ganado!");
         } else if (juego.getGameState() == GameState.DRAW) {
