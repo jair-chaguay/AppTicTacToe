@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="495.0" prefWidth="372.0" style="-fx-background-color: #05001e;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ec.edu.espol.tictactoev1.PlayController">
+   <children>
+      <ImageView fitHeight="71.0" fitWidth="71.0" layoutX="243.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../imgs/JugadorCirculo.png" />
+         </image></ImageView>
+      <Pane fx:id="background" layoutX="36.0" layoutY="146.0" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: #ffb5b5;" />
+      <ImageView fitHeight="71.0" fitWidth="71.0" layoutX="57.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../imgs/JugadorEquis.png" />
+         </image></ImageView>
+      <Label layoutX="230.0" layoutY="102.0" text="JUGADOR 2" textFill="#f274d2">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="42.0" layoutY="103.0" text="JUGADOR 1" textFill="#57e3ff">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="imgws" fitHeight="59.0" fitWidth="71.0" layoutX="151.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</Pane>

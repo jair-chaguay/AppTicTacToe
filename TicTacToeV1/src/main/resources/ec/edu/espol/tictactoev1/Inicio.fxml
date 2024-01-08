@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="461.0" prefWidth="372.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ec.edu.espol.tictactoev1.InicioController">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="495.0" prefWidth="372.0" spacing="20.0" style="-fx-background-color: #ffffff;">
+         <children>
+            <Label text="TRES EN RAYA" textFill="#05a187">
+               <font>
+                  <Font name="Bauhaus 93" size="41.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="232.0" fitWidth="224.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../imgs/Inicio.jpg" />
+               </image>
+            </ImageView>
+            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="16.0">
+               <children>
+                  <Button fx:id="buttonPlay" mnemonicParsing="false" onMousePressed="#difficult" prefHeight="63.0" prefWidth="160.0" text="VS MAQUINA">
+                     <font>
+                        <Font name="Berlin Sans FB" size="17.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onMouseClicked="#jugador" prefHeight="64.0" prefWidth="160.0" text="VS. JUGADOR">
+                     <font>
+                        <Font name="Berlin Sans FB" size="17.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets top="40.0" />
+         </padding>
+      </VBox>
+   </children>
+</Pane>
