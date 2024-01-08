@@ -32,8 +32,7 @@ public class PlayController implements Initializable {
      * Initializes the controller class.
      */
     private TicTacToe juego;
-    @FXML
-    ImageView imgws;
+    
     
     @FXML
     private Pane background;
