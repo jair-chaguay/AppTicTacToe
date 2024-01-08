@@ -4,13 +4,24 @@
  */
 package ec.edu.espol.tictactoev1.clas;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
  *
  * @author alexc
  */
-public class TicTacToe {
+public class TicTacToe implements Serializable {
 
     private GameSimbol[][] tablero;
     private GameState gameState;
@@ -70,7 +81,7 @@ public class TicTacToe {
         return false;
     }
 
-    public  void verificarEstadoJuego() {
+    public void verificarEstadoJuego() {
         for (int i = 0; i < 3; i++) {
             if (tablero[i][0] == tablero[i][1] && tablero[i][1] == tablero[i][2] && tablero[i][0] != GameSimbol.NONE) {
                 gameState = getGameStateOfGameSimbol(tablero[i][0]);
@@ -177,13 +188,13 @@ public class TicTacToe {
     }
 
     void finalizarJuego() {
-    mostrarTablero();
-    if (gameState == GameState.WIN_X || gameState == GameState.WIN_O) {
-        System.out.println("¡" + jugadorActual.getNombre() + " ha ganado!");
-    } else if (gameState == GameState.DRAW) {
-        System.out.println("¡El juego ha terminado en empate!");
+        mostrarTablero();
+        if (gameState == GameState.WIN_X || gameState == GameState.WIN_O) {
+            System.out.println("¡" + jugadorActual.getNombre() + " ha ganado!");
+        } else if (gameState == GameState.DRAW) {
+            System.out.println("¡El juego ha terminado en empate!");
+        }
     }
-}
 
     public void reiniciarJuego() {
         resetTablero();
@@ -191,5 +202,39 @@ public class TicTacToe {
         gameState = GameState.NO_WINNER;
         System.out.println("¡Nuevo juego comenzado!");
         mostrarTablero();
+    }
+
+    
+    //DEBE SER CUANDO SE PRESIONE EL BOTON DE GUARDADO
+     public void guardarJuego(String archivo) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(archivo))) {
+           
+            writer.write(jugador1.getNombre() + "/" + jugador1.getSimbolo() + "/");
+            writer.write(jugador2.getNombre() + "/" + jugador2.getSimbolo() + "/");
+            for (GameSimbol[] fila : tablero) {
+                for (GameSimbol casilla : fila) {
+                    writer.write(casilla.toString() + "/");
+                }
+            }
+            writer.write(jugadorActual.getNombre() + "/");
+            writer.write(gameState.toString());
+            System.out.println("Juego guardado en: " + archivo);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+     // AL PRESIONAR UNA PARTIDA EN LAS GUARDADAS
+    public void cargarJuego(String archivo) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(archivo))) {
+            String linea = reader.readLine();
+            if (linea != null) {    
+                String[] datos = linea.split("/");
+                //SE LEEN LOS DATOS PARA RECONSTRUIR TODO
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

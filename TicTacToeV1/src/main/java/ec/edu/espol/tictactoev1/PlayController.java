@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package ec.edu.espol.tictactoev1;
 
 import ec.edu.espol.tictactoev1.clas.GameSimbol;
@@ -21,16 +17,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
-/**
- * FXML Controller class
- *
- * @author alexc
- */
+
 public class PlayController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
     private TicTacToe juego;
     
     
@@ -45,6 +34,7 @@ public class PlayController implements Initializable {
         Jugadorr jugador2 = new Jugadorr("Jugador2", GameSimbol.O);
         juego = new TicTacToe(jugador1, jugador2);
         crearCuadros();
+        
     }
 
     @FXML

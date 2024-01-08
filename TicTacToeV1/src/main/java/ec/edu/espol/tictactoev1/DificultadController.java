@@ -23,10 +23,7 @@ import javafx.scene.input.MouseEvent;
  */
 public class DificultadController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
-    // fx:controller="ec.edu.espol.tictactoev1.DificultadController"
+ 
     @FXML
     private Button btnFacil;
 
