@@ -86,6 +86,7 @@ public class PlayController implements Initializable {
             if (juego.getGameState() == GameState.NO_WINNER) {
                 if (juego.setSimbolo(fila, columna)) {
                     juego.cambiarJugador();
+                    
                     asignarEquisOCirculo(imgView, obtenerImagenParaJugadorActual());
 
                     juego.verificarEstadoJuego();
@@ -96,6 +97,8 @@ public class PlayController implements Initializable {
             }
         });
     }
+    
+    
 
     private String obtenerImagenParaJugadorActual() {
         if (juego.getJugadorActual().getSimbolo() == GameSimbol.X) {

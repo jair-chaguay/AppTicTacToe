@@ -8,27 +8,27 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="495.0" prefWidth="372.0" style="-fx-background-color: #05001e;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ec.edu.espol.tictactoev1.PlayController">
    <children>
-      <ImageView fx:id="imgJugador2" fitHeight="71.0" fitWidth="71.0" layoutX="243.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgJugador2" fitHeight="71.0" fitWidth="71.0" layoutX="229.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../imgs/JugadorCirculo.png" />
          </image></ImageView>
       <Pane fx:id="background" layoutX="36.0" layoutY="146.0" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: #ffb5b5;" />
-      <ImageView fx:id="imgJugador1" fitHeight="71.0" fitWidth="71.0" layoutX="57.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgJugador1" fitHeight="71.0" fitWidth="71.0" layoutX="74.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../imgs/JugadorEquis.png" />
          </image></ImageView>
-      <Label layoutX="230.0" layoutY="102.0" text="JUGADOR 2" textFill="#f274d2">
+      <Label layoutX="216.0" layoutY="102.0" text="JUGADOR 2" textFill="#f274d2">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="42.0" layoutY="103.0" text="JUGADOR 1" textFill="#57e3ff">
+      <Label layoutX="59.0" layoutY="103.0" text="JUGADOR 1" textFill="#57e3ff">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
       <ImageView fx:id="imgws" fitHeight="59.0" fitWidth="71.0" layoutX="151.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="guardarImg" fitHeight="34.0" fitWidth="28.0" layoutX="22.0" layoutY="13.0" onMouseClicked="#guardarPartida" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="guardarImg" fitHeight="71.0" fitWidth="64.0" layoutX="4.0" layoutY="1.0" onMouseClicked="#guardarPartida" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../imgs/guardar.png" />
          </image>
