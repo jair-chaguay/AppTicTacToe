@@ -20,7 +20,7 @@ import javafx.scene.layout.Pane;
 
 public class PlayController implements Initializable {
 
-    private TicTacToe juego;
+    public TicTacToe juego;
 
     @FXML
     private Pane background;

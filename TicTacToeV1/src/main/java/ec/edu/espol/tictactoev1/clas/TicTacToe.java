@@ -14,7 +14,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -23,11 +25,14 @@ import java.util.Scanner;
  */
 public class TicTacToe implements Serializable {
 
+    public static List<String> juegosGuardados = new ArrayList();
+
     private GameSimbol[][] tablero;
     private GameState gameState;
     private Jugadorr jugador1;
     private Jugadorr jugador2;
     private Jugadorr jugadorActual;
+        
 
     public TicTacToe(Jugadorr jugador1, Jugadorr jugador2) {
         this.jugador1 = jugador1;
@@ -43,6 +48,7 @@ public class TicTacToe implements Serializable {
         }
 
         this.gameState = GameState.NO_WINNER;
+        
     }
 
 //    public TicTacToe(Jugadorr jugador1, Maquina maquina) {
@@ -204,8 +210,9 @@ public class TicTacToe implements Serializable {
         mostrarTablero();
     }
 
+    //LLENA  EL TXT
     public void guardarJuego(String archivo) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/" + archivo, true))) {         
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/" + archivo,true))) {
             writer.write(jugador1.getNombre() + "/" + jugador1.getSimbolo() + "/");
             writer.write(jugador2.getNombre() + "/" + jugador2.getSimbolo() + "/");
             for (GameSimbol[] fila : tablero) {
@@ -217,14 +224,33 @@ public class TicTacToe implements Serializable {
             writer.write(gameState.toString());
             writer.newLine();
             writer.close();
+
             System.out.println("Juego guardado en: " + archivo);
+            
+            
+
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("error de guardar");
         }
+        
     }
 
-    // AL PRESIONAR UNA PARTIDA EN LAS GUARDADAS
-    public void cargarJuego(String archivo) {
-       
+    //LEE EL TXT
+    public List<String> cargarJuego(String archivo) {
+         List<String> listaCargada = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/" + archivo))) {
+            String linea;
+            while ((linea = reader.readLine()) != null) {
+                listaCargada.add(linea);
+            }
+        } catch (IOException e) {
+            System.out.println("error de carga");
+        }
+
+        return listaCargada;
+
     }
+    
+   
 }
