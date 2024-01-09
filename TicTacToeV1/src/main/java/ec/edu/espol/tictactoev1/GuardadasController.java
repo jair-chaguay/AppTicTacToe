@@ -23,9 +23,10 @@ import javafx.scene.input.MouseEvent;
 public class GuardadasController implements Initializable {
 
 @FXML
-    private ScrollPane listaP;
+    private ScrollPane medioSP;
 @FXML
     private Label labelCantidad;
+
 
     public static Jugadorr jugador1 = new Jugadorr();
 
@@ -41,6 +42,15 @@ public class GuardadasController implements Initializable {
     private void jugar(MouseEvent evt) {
         try {
             App.setRoot("Play");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    @FXML
+    private void inicio(MouseEvent evt) {
+        try {
+            App.setRoot("Inicio");
         } catch (IOException ex) {
             ex.printStackTrace();
         }

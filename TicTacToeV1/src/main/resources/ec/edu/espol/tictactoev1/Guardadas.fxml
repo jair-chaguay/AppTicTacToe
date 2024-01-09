@@ -3,6 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -13,23 +15,23 @@
    <children>
       <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="483.0" prefWidth="354.0" spacing="40.0">
          <children>
-            <Label text="Selecciona tu partida">
+            <Label prefHeight="14.0" prefWidth="279.0" text="Selecciona tu partida">
                <font>
                   <Font name="Maiandra GD" size="31.0" />
                </font>
             </Label>
-            <VBox fx:id="medio" alignment="TOP_CENTER" prefHeight="415.0" prefWidth="354.0" spacing="20.0">
+            <VBox fx:id="medio" alignment="TOP_CENTER" prefHeight="284.0" prefWidth="354.0" spacing="20.0">
                <children>
-                  <ScrollPane fx:id="medio" prefHeight="309.0" prefWidth="354.0">
+                  <ScrollPane fx:id="medioSP" prefHeight="309.0" prefWidth="354.0">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="297.0" prefWidth="353.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="353.0" prefWidth="353.0" />
                     </content>
                   </ScrollPane>
                </children>
             </VBox>
             <HBox prefHeight="1.0" prefWidth="354.0">
                <children>
-                  <Label fx:id="labelCantidad" prefHeight="19.0" prefWidth="293.0" text="               Numero de Partidas Guardadas: " textAlignment="CENTER">
+                  <Label prefHeight="19.0" prefWidth="288.0" text="               Numero de Partidas Guardadas:" textAlignment="CENTER">
                      <font>
                         <Font name="Maiandra GD" size="15.0" />
                      </font>
@@ -37,7 +39,7 @@
                         <Insets />
                      </HBox.margin>
                   </Label>
-                  <Label prefHeight="0.0" prefWidth="25.0" text="0">
+                  <Label fx:id="labelCantidad" prefHeight="19.0" prefWidth="16.0" text="0">
                      <font>
                         <Font name="Maiandra GD" size="15.0" />
                      </font>
@@ -49,5 +51,10 @@
             <Insets top="50.0" />
          </padding>
       </VBox>
+      <ImageView fx:id="atrasImg" onMouseClicked="#inicio" fitHeight="38.0" fitWidth="39.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../imgs/1174407.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>
