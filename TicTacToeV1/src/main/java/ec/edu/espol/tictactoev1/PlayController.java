@@ -64,6 +64,11 @@ public class PlayController implements Initializable {
             layoutY += (size + margin);
         }
     }
+    @FXML
+    private void guardarPartida(MouseEvent ev){
+        juego.guardarJuego("partidas.txt");
+        
+    }
 
     private void eventPane(Pane p, ImageView imgView) {
         p.setCursor(Cursor.HAND);

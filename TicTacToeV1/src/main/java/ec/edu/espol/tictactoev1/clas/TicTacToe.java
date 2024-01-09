@@ -204,11 +204,8 @@ public class TicTacToe implements Serializable {
         mostrarTablero();
     }
 
-    
-    //DEBE SER CUANDO SE PRESIONE EL BOTON DE GUARDADO
-     public void guardarJuego(String archivo) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(archivo))) {
-           
+    public void guardarJuego(String archivo) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/" + archivo, true))) {         
             writer.write(jugador1.getNombre() + "/" + jugador1.getSimbolo() + "/");
             writer.write(jugador2.getNombre() + "/" + jugador2.getSimbolo() + "/");
             for (GameSimbol[] fila : tablero) {
@@ -218,23 +215,16 @@ public class TicTacToe implements Serializable {
             }
             writer.write(jugadorActual.getNombre() + "/");
             writer.write(gameState.toString());
+            writer.newLine();
+            writer.close();
             System.out.println("Juego guardado en: " + archivo);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-     // AL PRESIONAR UNA PARTIDA EN LAS GUARDADAS
+    // AL PRESIONAR UNA PARTIDA EN LAS GUARDADAS
     public void cargarJuego(String archivo) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(archivo))) {
-            String linea = reader.readLine();
-            if (linea != null) {    
-                String[] datos = linea.split("/");
-                //SE LEEN LOS DATOS PARA RECONSTRUIR TODO
-
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+       
     }
 }

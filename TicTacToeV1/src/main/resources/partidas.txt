@@ -1,0 +1,1 @@
+Jugador1/X/Jugador2/O/X/O/NONE/X/NONE/NONE/NONE/NONE/NONE/Jugador2/NO_WINNER
