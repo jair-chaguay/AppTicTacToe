@@ -180,7 +180,7 @@ public class TicTacToe implements Serializable {
         verificarEstadoJuego();
     }
 
-    private boolean esMovimientoValido(int fila, int columna) {
+    boolean esMovimientoValido(int fila, int columna) {
         if (fila >= 0 && fila < 3 && columna >= 0 && columna < 3 && tablero[fila][columna] == GameSimbol.NONE) {
             return true;
         } else {

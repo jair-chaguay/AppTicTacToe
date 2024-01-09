@@ -23,6 +23,10 @@ public class PlayController implements Initializable {
     public TicTacToe juego;
 
     @FXML
+    private ImageView imgJugador1;
+    @FXML
+    private ImageView imgJugador2;
+    @FXML
     private Pane background;
 
     @Override
@@ -64,10 +68,11 @@ public class PlayController implements Initializable {
             layoutY += (size + margin);
         }
     }
+
     @FXML
-    private void guardarPartida(MouseEvent ev){
+    private void guardarPartida(MouseEvent ev) {
         juego.guardarJuego("partidas.txt");
-        
+
     }
 
     private void eventPane(Pane p, ImageView imgView) {
@@ -80,8 +85,9 @@ public class PlayController implements Initializable {
 
             if (juego.getGameState() == GameState.NO_WINNER) {
                 if (juego.setSimbolo(fila, columna)) {
-                    asignarEquisOCirculo(imgView, obtenerImagenParaJugadorActual());
                     juego.cambiarJugador();
+                    asignarEquisOCirculo(imgView, obtenerImagenParaJugadorActual());
+
                     juego.verificarEstadoJuego();
                     mostrarResultadoDelJuego();
                 } else {
@@ -95,13 +101,9 @@ public class PlayController implements Initializable {
         if (juego.getJugadorActual().getSimbolo() == GameSimbol.X) {
             juego.cambiarJugador();
 
-            System.out.println("El jugador actual es:" + juego.getJugadorActual().getNombre());
-
             return "Equis.png";
         } else {
             juego.cambiarJugador();
-            System.out.println("El jugador actual es:" + juego.getJugadorActual().getNombre());
-
             return "Circulo.png";
         }
     }
@@ -117,7 +119,7 @@ public class PlayController implements Initializable {
 
     private void mostrarResultadoDelJuego() {
         if (juego.getGameState() == GameState.WIN_X || juego.getGameState() == GameState.WIN_O) {
-            System.out.println("¡" + juego.getJugadorActual().getNombre() + " ha ganado!");
+            juego.cambiarJugador();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setContentText("¡" + juego.getJugadorActual().getNombre() + " ha ganado!");
             alert.show();
@@ -129,5 +131,4 @@ public class PlayController implements Initializable {
         }
     }
 
-   
 }

@@ -6,14 +6,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="495.0" prefWidth="372.0" style="-fx-background-color: #05001e;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ec.edu.espol.tictactoev1.PlayController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="495.0" prefWidth="372.0" style="-fx-background-color: #05001e;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ec.edu.espol.tictactoev1.PlayController">
    <children>
-      <ImageView fitHeight="71.0" fitWidth="71.0" layoutX="243.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgJugador2" fitHeight="71.0" fitWidth="71.0" layoutX="243.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../imgs/JugadorCirculo.png" />
          </image></ImageView>
       <Pane fx:id="background" layoutX="36.0" layoutY="146.0" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: #ffb5b5;" />
-      <ImageView fitHeight="71.0" fitWidth="71.0" layoutX="57.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgJugador1" fitHeight="71.0" fitWidth="71.0" layoutX="57.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../imgs/JugadorEquis.png" />
          </image></ImageView>
@@ -28,7 +28,7 @@
          </font>
       </Label>
       <ImageView fx:id="imgws" fitHeight="59.0" fitWidth="71.0" layoutX="151.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="guardarImg" onMouseClicked="#guardarPartida" fitHeight="34.0" fitWidth="28.0" layoutX="22.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="guardarImg" fitHeight="34.0" fitWidth="28.0" layoutX="22.0" layoutY="13.0" onMouseClicked="#guardarPartida" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../imgs/guardar.png" />
          </image>
