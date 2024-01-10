@@ -25,7 +25,7 @@ import java.util.Scanner;
  */
 public class TicTacToe implements Serializable {
 
-    public static List<String> juegosGuardados = new ArrayList();
+
 
     private GameSimbol[][] tablero;
     private GameState gameState;
@@ -233,24 +233,42 @@ public class TicTacToe implements Serializable {
             System.out.println("error de guardar");
         }
         
+        
     }
 
-    //LEE EL TXT
-    public List<String> cargarJuego(String archivo) {
-         List<String> listaCargada = new ArrayList<>();
-
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/" + archivo))) {
-            String linea;
-            while ((linea = reader.readLine()) != null) {
-                listaCargada.add(linea);
-            }
-        } catch (IOException e) {
-            System.out.println("error de carga");
-        }
-
-        return listaCargada;
-
+    public GameSimbol[][] getTablero() {
+        return tablero;
     }
+
+    public Jugadorr getJugador1() {
+        return jugador1;
+    }
+
+    public Jugadorr getJugador2() {
+        return jugador2;
+    }
+
+    public void setTablero(GameSimbol[][] tablero) {
+        this.tablero = tablero;
+    }
+
+    public void setGameState(GameState gameState) {
+        this.gameState = gameState;
+    }
+
+    public void setJugador1(Jugadorr jugador1) {
+        this.jugador1 = jugador1;
+    }
+
+    public void setJugador2(Jugadorr jugador2) {
+        this.jugador2 = jugador2;
+    }
+
+    public void setJugadorActual(Jugadorr jugadorActual) {
+        this.jugadorActual = jugadorActual;
+    }
+
+  
     
    
 }
