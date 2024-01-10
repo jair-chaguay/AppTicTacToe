@@ -25,14 +25,11 @@ import java.util.Scanner;
  */
 public class TicTacToe implements Serializable {
 
-
-
     private GameSimbol[][] tablero;
     private GameState gameState;
     private Jugadorr jugador1;
     private Jugadorr jugador2;
     private Jugadorr jugadorActual;
-        
 
     public TicTacToe(Jugadorr jugador1, Jugadorr jugador2) {
         this.jugador1 = jugador1;
@@ -48,8 +45,9 @@ public class TicTacToe implements Serializable {
         }
 
         this.gameState = GameState.NO_WINNER;
-        
+
     }
+    
 
 //    public TicTacToe(Jugadorr jugador1, Maquina maquina) {
 //        this.jugador1 = jugador1;
@@ -212,7 +210,7 @@ public class TicTacToe implements Serializable {
 
     //LLENA  EL TXT
     public void guardarJuego(String archivo) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/" + archivo,true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/" + archivo, true))) {
             writer.write(jugador1.getNombre() + "/" + jugador1.getSimbolo() + "/");
             writer.write(jugador2.getNombre() + "/" + jugador2.getSimbolo() + "/");
             for (GameSimbol[] fila : tablero) {
@@ -226,14 +224,11 @@ public class TicTacToe implements Serializable {
             writer.close();
 
             System.out.println("Juego guardado en: " + archivo);
-            
-            
 
         } catch (IOException e) {
             System.out.println("error de guardar");
         }
-        
-        
+
     }
 
     public GameSimbol[][] getTablero() {
@@ -268,7 +263,4 @@ public class TicTacToe implements Serializable {
         this.jugadorActual = jugadorActual;
     }
 
-  
-    
-   
 }

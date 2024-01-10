@@ -12,8 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -21,6 +24,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -92,7 +96,6 @@ public class GuardadasController implements Initializable {
             Label etiquetaDetalle = new Label(partida.getJugador1().getNombre() + " (" + partida.getJugador1().getSimbolo()
                     + ") vs " + partida.getJugador2().getNombre() + " (" + partida.getJugador2().getSimbolo() + ") - Estado: "
                     + partida.getGameState());
-
             contenedor.getChildren().addAll(etiquetaTitulo, etiquetaDetalle);
             contenedor.setOnMouseClicked(event -> {
                 reanudarPartida(partida);
@@ -104,15 +107,21 @@ public class GuardadasController implements Initializable {
         medioSP.setContent(contenedorPartidas);
     }
 
-    public void reanudarPartida(TicTacToe partida) {
-        //prueba
+    private void reanudarPartida(TicTacToe juegoGuardado) {
         try {
-            App.setRoot("Play");
-            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Play.fxml"));
+            Parent root = loader.load();
+
+            PlayController playController = loader.getController();
+            playController.reanudarGuardado(juegoGuardado);
+
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) labelCantidad.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
         } catch (IOException ex) {
+            ex.printStackTrace();
         }
-        //lleva al usuario a la partida seleccionada 
-        //lleva al root Play
     }
 
     public List<String> leeJuegos(String archivo) {
@@ -137,16 +146,15 @@ public class GuardadasController implements Initializable {
         for (String linea : listaLineas) {
             String[] datos = linea.split("/");
 
-            String nombreJugador1 = datos[0];
-            GameSimbol simboloJugador1 = GameSimbol.valueOf(datos[1]);
-            Jugadorr jugador1 = new Jugadorr(nombreJugador1, simboloJugador1);
-
-            String nombreJugador2 = datos[2];
-            GameSimbol simboloJugador2 = GameSimbol.valueOf(datos[3]);
-            Jugadorr jugador2 = new Jugadorr(nombreJugador2, simboloJugador2);
-
+            String nombre1 = datos[0];
+            GameSimbol simbolo1 = GameSimbol.valueOf(datos[1]);
+            Jugadorr jugador1 = new Jugadorr(nombre1, simbolo1);
+            String nombre2 = datos[2];
+            GameSimbol simbolo2 = GameSimbol.valueOf(datos[3]);
+            Jugadorr jugador2 = new Jugadorr(nombre2, simbolo2);
             TicTacToe partida = new TicTacToe(jugador1, jugador2);
             GameSimbol[][] tablero = new GameSimbol[3][3];
+            
             int index = 4;
             for (int i = 0; i < 3; i++) {
                 for (int j = 0; j < 3; j++) {
@@ -156,9 +164,12 @@ public class GuardadasController implements Initializable {
             }
 
             partida.setTablero(tablero);
-            partida.setJugadorActual((datos[index].equals(jugador1.getNombre())) ? jugador1 : jugador2);
+            if (datos[index].equals(jugador1.getNombre())) {
+                partida.setJugadorActual(jugador1);
+            } else {
+                partida.setJugadorActual(jugador2);
+            }
             partida.setGameState(GameState.valueOf(datos[index + 1]));
-
             lista.add(partida);
         }
 

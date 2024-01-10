@@ -86,7 +86,7 @@ public class PlayController implements Initializable {
             if (juego.getGameState() == GameState.NO_WINNER) {
                 if (juego.setSimbolo(fila, columna)) {
                     juego.cambiarJugador();
-                    
+
                     asignarEquisOCirculo(imgView, obtenerImagenParaJugadorActual());
 
                     juego.verificarEstadoJuego();
@@ -97,8 +97,6 @@ public class PlayController implements Initializable {
             }
         });
     }
-    
-    
 
     private String obtenerImagenParaJugadorActual() {
         if (juego.getJugadorActual().getSimbolo() == GameSimbol.X) {
@@ -131,6 +129,28 @@ public class PlayController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setContentText("¡El juego ha terminado en empate!");
             alert.show();
+        }
+    }
+
+    public void reanudarGuardado(TicTacToe juegoGuardado) {
+        this.juego = juegoGuardado;
+        actualizarTablero();
+        mostrarResultadoDelJuego();
+    }
+
+    private void actualizarTablero() {
+        GameSimbol[][] tablero = juego.getTablero();
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                String id = i + "," + j;
+                Pane pane = (Pane) background.lookup("#" + id);
+                if (tablero[i][j] == GameSimbol.X) {
+                    asignarEquisOCirculo((ImageView) pane.getChildren().get(0), "Equis.png");
+                } else if (tablero[i][j] == GameSimbol.O) {
+                    asignarEquisOCirculo((ImageView) pane.getChildren().get(0), "Circulo.png");
+                }
+            }
         }
     }
 
