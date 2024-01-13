@@ -40,4 +40,13 @@ public class Jugadorr {
     public void setSimbolo(GameSimbol simbolo) {
         this.simbolo = simbolo;
     }
+    
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) return true;
+        if (o.getClass() != this.getClass() || o == null) return false;
+        
+        Jugadorr other = (Jugadorr)o;
+        return other.simbolo == this.simbolo;
+    }
 }

@@ -62,6 +62,7 @@ public class Tree<E> {
         return result;
     }
     
+    //Probablemente es mejor cambiar estos dos metodos por uno con una interfaz Operation
     public int countLeafs() {
         if (isEmpty()) return 0;
         
@@ -79,6 +80,26 @@ public class Tree<E> {
             }
         }
         return c;
+    }
+    
+    public List<E> getLeafs() {
+        List<E> result = new LinkedList<>();
+        
+        if (isEmpty()) return result;
+        
+        Deque<Tree<E>> cola = new ArrayDeque<>();
+        cola.offer(this);
+        while (!cola.isEmpty()) {
+            Tree<E> tree = cola.poll();
+            if (!tree.isLeaf()) {
+                for (Tree t : tree.getChildren()) {
+                    cola.offer(t);
+                }
+            } else {
+                result.add(tree.root.contenido);
+            }
+        }
+        return result;
     }
     
     private class TreeNode<E> {

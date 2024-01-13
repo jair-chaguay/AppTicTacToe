@@ -230,10 +230,33 @@ public class TicTacToe implements Serializable {
         }
 
     }
+    
+    public TicTacToe copyGame() {
+        Jugadorr j1 = new Jugadorr(GameSimbol.X);
+        Jugadorr j2 = new Jugadorr(GameSimbol.O);
+        Jugadorr jActual = new Jugadorr();
+        TicTacToe nuevoJuego = new TicTacToe(j1,j2);
+        if (this.jugador1.equals(this.jugadorActual)) {
+            nuevoJuego.setJugadorActual(j1);
+        } else {
+            nuevoJuego.setJugadorActual(j2);
+        }
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                nuevoJuego.getTablero()[i][j] = this.getTablero()[i][j];
+            }
+        }
+        return nuevoJuego;
+    }
 
     public GameSimbol[][] getTablero() {
         return tablero;
     }
+    
+    public void setGameSimbolInTablero(int i, int j, GameSimbol gameSimbol) {
+        this.tablero[i][j] = gameSimbol;
+    }
+    
 
     public Jugadorr getJugador1() {
         return jugador1;
