@@ -1,11 +1,11 @@
+ec\edu\espol\tictactoev1\GuardadasController.class
+ec\edu\espol\tictactoev1\DificultadController.class
+module-info.class
 ec\edu\espol\tictactoev1\App.class
 ec\edu\espol\tictactoev1\clas\TicTacToe.class
 ec\edu\espol\tictactoev1\clas\GameSimbol.class
 ec\edu\espol\tictactoev1\InicioController.class
 ec\edu\espol\tictactoev1\clas\Maquina.class
-ec\edu\espol\tictactoev1\GuardadasController.class
-ec\edu\espol\tictactoev1\DificultadController.class
 ec\edu\espol\tictactoev1\PlayController.class
-module-info.class
 ec\edu\espol\tictactoev1\clas\GameState.class
 ec\edu\espol\tictactoev1\clas\Jugadorr.class
