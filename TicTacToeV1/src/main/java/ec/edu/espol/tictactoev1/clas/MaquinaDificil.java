@@ -71,10 +71,18 @@ public class MaquinaDificil extends Jugadorr{
         for (TicTacToe game : scenarios) {
             path = brain.pathTo(game);
             if (!path.isEmpty()) {
+                path.pollLast(); //quita la raiz
                 result.add(path);
             }
         }
         return result;
+    }
+    
+    //Chequear algo que gane de una //la clave esta en el largo de las colas pilas
+    public String[] getBestMoveCoordenates() {
+        this.brain = generateAllValidScenarios(juegoActual, getContraryGameState(this.getSimbolo()));
+        List<ArrayDeque<TicTacToe>> moves = pathToScenarios(getBestScenarios());
+        return null;
     }
     
     public boolean allDrawScenarios(List<TicTacToe> juegos) {
@@ -94,5 +102,9 @@ public class MaquinaDificil extends Jugadorr{
     
     private static GameState getGameStateOfGameSimbol(GameSimbol gs) {
         return gs == GameSimbol.X ? GameState.WIN_X : GameState.WIN_O;
+    }
+    
+    private GameState getContraryGameState(GameSimbol gs) {
+        return gs == GameSimbol.X ? GameState.WIN_O : GameState.WIN_X;
     }
 }
