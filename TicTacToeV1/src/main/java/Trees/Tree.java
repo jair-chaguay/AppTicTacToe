@@ -8,6 +8,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  *
@@ -101,6 +102,52 @@ public class Tree<E> {
             }
         }
         return result;
+    }
+    
+//    public ArrayDeque<E> pathTo(E objective) {
+//        ArrayDeque<E> result = new ArrayDeque<>();
+//        if (isEmpty()) return result;
+//        
+//        Deque<Tree<E>> cola = new ArrayDeque<>();
+//        cola.push(this);
+//        
+//        while (!cola.isEmpty()) {
+//            Tree<E> arbol = cola.pop();
+//            result.offerFirst(arbol.root.contenido);
+//            if (objective.equals(arbol.root.contenido)) {
+//                result.push(this.root.contenido);
+//                return result;
+//            }
+//            if (arbol.isLeaf()) result.poll();
+//            for (Tree t : arbol.getChildren()) {
+//                cola.push(t);
+//            }
+//        }        
+//        return result;
+//    }
+    
+    public ArrayDeque<E> pathTo(E objetivo) {
+        ArrayDeque<E> camino = new ArrayDeque<>();
+        if (pathToHelper(this, objetivo, camino)) {
+            return camino;
+        }
+        return new ArrayDeque<>();
+    }
+    
+    private boolean pathToHelper(Tree<E> actual, E objetivo, ArrayDeque<E> camino) {
+        if (actual == null) {
+            return false;
+        }
+        camino.push(actual.root.contenido);
+        if(objetivo.equals(actual.root.contenido)) return true;
+        
+        for (Tree<E> t : actual.getChildren()) {
+            if (pathToHelper(t, objetivo, camino)) {
+                return true;
+            }
+        }
+        camino.pop();
+        return false;
     }
     
     private class TreeNode<E> {

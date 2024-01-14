@@ -65,6 +65,18 @@ public class MaquinaDificil extends Jugadorr{
         return result;
     }
     
+    public List<ArrayDeque<TicTacToe>> pathToScenarios(List<TicTacToe> scenarios) {
+        ArrayList<ArrayDeque<TicTacToe>> result = new ArrayList<>();
+        ArrayDeque<TicTacToe> path;
+        for (TicTacToe game : scenarios) {
+            path = brain.pathTo(game);
+            if (!path.isEmpty()) {
+                result.add(path);
+            }
+        }
+        return result;
+    }
+    
     public boolean allDrawScenarios(List<TicTacToe> juegos) {
         for (TicTacToe t : juegos) {
             if (t.getGameState() != GameState.DRAW) {
