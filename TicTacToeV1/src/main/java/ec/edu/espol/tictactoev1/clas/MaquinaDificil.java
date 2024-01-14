@@ -23,10 +23,19 @@ public class MaquinaDificil extends Jugadorr{
     public MaquinaDificil(GameSimbol simbol) {
         super(simbol);
         this.setNombre("Maquina dificil");
+        this.brain = new Tree<>();
     }
     
     public void setJuegoActual(TicTacToe juegoActual) {
         this.juegoActual = juegoActual;
+    }
+    
+    public Tree<TicTacToe> getBrain() {
+        return brain;
+    }
+    
+    public void setBrain(Tree<TicTacToe> brain) {
+        this.brain = brain;
     }
     
     public static Tree<TicTacToe> generateAllValidScenarios(TicTacToe juego, GameState ContraryGameState) {
@@ -36,19 +45,20 @@ public class MaquinaDificil extends Jugadorr{
             for (int j = 0; j < 3; j++) {               
                 nuevoJuego = juego.copyGame();
                 nuevoJuego.verificarEstadoJuego();
-                if (nuevoJuego.setSimbolo(i,j) == true && nuevoJuego.getGameState() != ContraryGameState)
+                boolean movRealizado = nuevoJuego.setSimbolo(i,j);
+                if ((movRealizado && nuevoJuego.getGameState() != ContraryGameState))
                     scenarios.setChild(generateAllValidScenarios(nuevoJuego, ContraryGameState));
                //scenarios.setChild(generateAllValidScenarios(nuevoJuego));               
             }
-        }        
+        }
         return scenarios;
     }
     
-    public List<TicTacToe> getBestScenarios(Tree<TicTacToe> scenarios, TicTacToe juego, GameState desiredState) {
-        List<TicTacToe> leafs = scenarios.getLeafs();
+    public List<TicTacToe> getBestScenarios() {
+        List<TicTacToe> leafs = brain.getLeafs();
         ArrayList<TicTacToe> result = new ArrayList<>();
         for (TicTacToe t : leafs) {
-            if ((t.getGameState() == desiredState || t.getGameState() == GameState.DRAW) && !result.contains(t) ) {
+            if ((t.getGameState() == getGameStateOfGameSimbol(this.getSimbolo()) || t.getGameState() == GameState.DRAW) && !result.contains(t) ) {
                 result.add(t);
             }
         }

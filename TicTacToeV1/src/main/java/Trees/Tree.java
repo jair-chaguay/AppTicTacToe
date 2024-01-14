@@ -35,7 +35,7 @@ public class Tree<E> {
     }
     
     public void setRoot(E e) {
-        root.contenido = e;
+        root = new TreeNode<>(e);
     }
     
     public List<Tree<E>> getChildren() {

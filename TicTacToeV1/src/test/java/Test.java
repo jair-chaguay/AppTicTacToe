@@ -26,29 +26,28 @@ public class Test {
         Jugadorr j2 = new Jugadorr("j2", GameSimbol.O);
         
         TicTacToe juego = new TicTacToe(j1,j2);
-        juego.setSimbolo(0,0); //x
-        juego.setSimbolo(0,2); //o
-        juego.setSimbolo(1,1); //x
-//        juego.setSimbolo(1,1); //o
-//        juego.setSimbolo(2,1); //x
-//        juego.setSimbolo(2,2); //o
-       
+//        juego.setSimbolo(0,0); //x
+//        juego.setSimbolo(0,2); //o
+//        juego.setSimbolo(1,1); //x
+//        juego.setSimbolo(1,2); //o
+//        juego.setSimbolo(2,2); //x
+        System.out.println(juego.getGameState());
         juego.mostrarTablero();
         
         
-//        System.out.println(MaquinaDificil.generateAllValidScenarios(juego).countLeafs());
        
-        Tree<TicTacToe> tree = MaquinaDificil.generateAllValidScenarios(juego, GameState.WIN_X);
-//        System.out.println(tree.countLeafs());
-        List<TicTacToe> list = md.getBestScenarios(tree, juego, GameState.WIN_O);
+        md.setBrain(MaquinaDificil.generateAllValidScenarios(juego, GameState.WIN_O));
+        System.out.println(md.getBrain().countLeafs());
+
+        List<TicTacToe> list = md.getBestScenarios();
         System.out.println(list.size());
         
-        for (TicTacToe t: list) {
-            t.mostrarTablero();
-            System.out.println(t.getGameState());
-        }
+//        for (TicTacToe t: list) {
+//            t.mostrarTablero();
+//            System.out.println(t.getGameState());
+//        }
         
         System.out.println(md.allDrawScenarios(list));
-//        System.out.println(c);131184
+
     }
 }

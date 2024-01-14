@@ -246,6 +246,7 @@ public class TicTacToe implements Serializable {
                 nuevoJuego.getTablero()[i][j] = this.getTablero()[i][j];
             }
         }
+        nuevoJuego.verificarEstadoJuego();
         return nuevoJuego;
     }
 
