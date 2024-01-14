@@ -182,7 +182,7 @@ public class TicTacToe implements Serializable {
         if (fila >= 0 && fila < 3 && columna >= 0 && columna < 3 && tablero[fila][columna] == GameSimbol.NONE) {
             return true;
         } else {
-            manejarError("Movimiento no válido. Intente nuevamente.");
+            //manejarError("Movimiento no válido. Intente nuevamente.");
             return false;
         }
     }
@@ -286,4 +286,20 @@ public class TicTacToe implements Serializable {
         this.jugadorActual = jugadorActual;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TicTacToe)) return false;
+        
+        TicTacToe other = (TicTacToe) o;
+        
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (this.getTablero()[i][j] != other.getTablero()[i][j]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }

@@ -62,6 +62,7 @@ public class Tree<E> {
         return result;
     }
     
+    
     //Probablemente es mejor cambiar estos dos metodos por uno con una interfaz Operation
     public int countLeafs() {
         if (isEmpty()) return 0;
