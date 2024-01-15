@@ -30,6 +30,7 @@ public class TicTacToe implements Serializable {
     private Jugadorr jugador1;
     private Jugadorr jugador2;
     private Jugadorr jugadorActual;
+    private boolean partidaGuardada;
 
     public TicTacToe(Jugadorr jugador1, Jugadorr jugador2) {
         this.jugador1 = jugador1;
@@ -47,7 +48,6 @@ public class TicTacToe implements Serializable {
         this.gameState = GameState.NO_WINNER;
 
     }
-    
 
 //    public TicTacToe(Jugadorr jugador1, Maquina maquina) {
 //        this.jugador1 = jugador1;
@@ -177,7 +177,7 @@ public class TicTacToe implements Serializable {
         mostrarTablero();
         verificarEstadoJuego();
     }
-    
+
     public void realizarMovimiento(String[] movimiento) {
         int fila = Integer.parseInt(movimiento[0]);
         int columna = Integer.parseInt(movimiento[1]);
@@ -232,18 +232,23 @@ public class TicTacToe implements Serializable {
             writer.close();
 
             System.out.println("Juego guardado en: " + archivo);
+            partidaGuardada = true;
 
         } catch (IOException e) {
             System.out.println("error de guardar");
         }
 
     }
-    
+
+    public boolean isPartidaGuardada() {
+        return partidaGuardada;
+    }
+
     public TicTacToe copyGame() {
         Jugadorr j1 = new Jugadorr(GameSimbol.X);
         Jugadorr j2 = new Jugadorr(GameSimbol.O);
         Jugadorr jActual = new Jugadorr();
-        TicTacToe nuevoJuego = new TicTacToe(j1,j2);
+        TicTacToe nuevoJuego = new TicTacToe(j1, j2);
         if (this.jugador1.equals(this.jugadorActual)) {
             nuevoJuego.setJugadorActual(j1);
         } else {
@@ -261,11 +266,11 @@ public class TicTacToe implements Serializable {
     public GameSimbol[][] getTablero() {
         return tablero;
     }
-    
+
     public void setGameSimbolInTablero(int i, int j, GameSimbol gameSimbol) {
         this.tablero[i][j] = gameSimbol;
     }
-    
+
     public GameSimbol getGameSimbol(int i, int j) {
         return tablero[i][j];
     }
@@ -300,11 +305,15 @@ public class TicTacToe implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof TicTacToe)) return false;
-        
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof TicTacToe)) {
+            return false;
+        }
+
         TicTacToe other = (TicTacToe) o;
-        
+
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if (this.getTablero()[i][j] != other.getTablero()[i][j]) {

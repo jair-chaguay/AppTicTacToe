@@ -7,12 +7,14 @@ import ec.edu.espol.tictactoev1.clas.TicTacToe;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -73,6 +75,32 @@ public class PlayController implements Initializable {
     private void guardarPartida(MouseEvent ev) {
         juego.guardarJuego("partidas.txt");
 
+    }
+
+    @FXML
+    private void inicio(MouseEvent evt) {
+        if (!juego.isPartidaGuardada()) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText("¿Desea salir sin guardar la partida?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                try {
+                    App.setRoot("Inicio");
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            } else {
+                alert.close();
+            }
+        } else {
+            try {
+                App.setRoot("Inicio");
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     private void eventPane(Pane p, ImageView imgView) {
