@@ -92,7 +92,7 @@ public class MaquinaDificil extends Jugadorr{
         this.brain = generateAllValidScenarios(juegoActual, getContraryGameState(this.getSimbolo()));
         List<ArrayDeque<TicTacToe>> moves = pathToScenarios(getBestScenarios());
         ArrayDeque<TicTacToe> bestGame = moves.get(0);
-        for (ArrayDeque<TicTacToe> game : moves) {
+        for (ArrayDeque<TicTacToe> game : moves) {           
             if (game.size() < bestGame.size()) {
                 bestGame = game;
             }
@@ -102,6 +102,14 @@ public class MaquinaDificil extends Jugadorr{
         
         TicTacToe cGame = this.juegoActual.copyGame();
         cGame.mostrarTablero();
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (oneMoveToWin(juegoActual, getContraryGameSimbol(this.getSimbolo()), i, j)) {
+                    return (i +"," +j).split(",");
+                }
+                
+            }
+        }
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 cGame.setGameSimbolInTablero(i, j, this.getSimbolo());
@@ -133,7 +141,11 @@ public class MaquinaDificil extends Jugadorr{
         return gs == GameSimbol.X ? GameState.WIN_X : GameState.WIN_O;
     }
     
-    private GameState getContraryGameState(GameSimbol gs) {
+    private static GameState getContraryGameState(GameSimbol gs) {
         return gs == GameSimbol.X ? GameState.WIN_O : GameState.WIN_X;
+    }
+    
+    private static GameSimbol getContraryGameSimbol(GameSimbol gs) {
+        return gs == GameSimbol.X ? GameSimbol.O : GameSimbol.X;
     }
 }

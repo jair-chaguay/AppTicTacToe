@@ -23,22 +23,36 @@ import java.util.Set;
  */
 public class Test {
     public static void main(String[] args) {
-        MaquinaDificil md = new MaquinaDificil(GameSimbol.O);
+        MaquinaDificil md = new MaquinaDificil(GameSimbol.X);
 
         Jugadorr j1 = new Jugadorr("j1", GameSimbol.X);
         Jugadorr j2 = new Jugadorr("j2", GameSimbol.O);
 
         TicTacToe juego = new TicTacToe(j1,j2);
-        juego.setSimbolo(0,0); //x
-        juego.setSimbolo(0,2); //o
-        juego.setSimbolo(0,1); //x
+//        juego.setSimbolo(0,0); //x
+//        juego.setSimbolo(0,2); //o
+//        juego.setSimbolo(0,1); //x
 //        juego.setSimbolo(1,1); //o
 //        juego.setSimbolo(2,1); //x
 //        juego.setSimbolo(0,1); //o
         System.out.println(juego.getGameState());
         juego.mostrarTablero();
-        juego.realizarMovimiento();
-        juego.mostrarTablero();
+        md.setJuegoActual(juego);
+        
+        while (juego.getGameState() == GameState.NO_WINNER || juego.getGameState() != GameState.DRAW) {
+            
+            
+            
+            juego.realizarMovimiento(md.getBestMoveCoordenates());
+            juego.realizarMovimiento();
+        }
+        
+        
+        
+        
+        
+//        juego.realizarMovimiento();
+//        juego.mostrarTablero();
 
 //        md.setJuegoActual(juego);
 //        String[] move = md.getBestMoveCoordenates();
