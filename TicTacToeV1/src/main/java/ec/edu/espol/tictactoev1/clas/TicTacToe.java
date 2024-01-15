@@ -182,6 +182,7 @@ public class TicTacToe implements Serializable {
         int fila = Integer.parseInt(movimiento[0]);
         int columna = Integer.parseInt(movimiento[1]);
         setSimbolo(fila, columna);
+        mostrarTablero();
     }
 
     boolean esMovimientoValido(int fila, int columna) {
@@ -264,6 +265,9 @@ public class TicTacToe implements Serializable {
         this.tablero[i][j] = gameSimbol;
     }
     
+    public GameSimbol getGameSimbol(int i, int j) {
+        return tablero[i][j];
+    }
 
     public Jugadorr getJugador1() {
         return jugador1;
