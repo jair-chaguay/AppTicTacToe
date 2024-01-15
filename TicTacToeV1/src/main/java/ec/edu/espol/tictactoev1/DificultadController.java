@@ -53,6 +53,15 @@ public class DificultadController implements Initializable {
         btnDificil.setDisable(true);
 
     }
+    
+    @FXML
+    private void inicio(MouseEvent evt) {
+        try {
+            App.setRoot("Inicio");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 
     @FXML
     private void jugar(MouseEvent evt) {
