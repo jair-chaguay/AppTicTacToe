@@ -38,7 +38,7 @@ public class MaquinaDificil extends Jugadorr{
         this.brain = brain;
     }
     
-    public static Tree<TicTacToe> generateAllValidScenarios(TicTacToe juego, GameState ContraryGameState) {
+    
     public static boolean oneMoveToWin(TicTacToe juego, GameSimbol gameSimbol, int i, int j) {
         TicTacToe nuevoJuego = juego.copyGame();
         if (nuevoJuego.getGameSimbol(i, j) == GameSimbol.NONE)
@@ -47,6 +47,7 @@ public class MaquinaDificil extends Jugadorr{
         return nuevoJuego.getGameState() == getGameStateOfGameSimbol(gameSimbol);
     }
     
+    public static Tree<TicTacToe> generateAllValidScenarios(TicTacToe juego, GameState ContraryGameState) {
         Tree<TicTacToe> scenarios = new Tree<>(juego);
         TicTacToe nuevoJuego;
         for (int i = 0; i < 3; i++) {
