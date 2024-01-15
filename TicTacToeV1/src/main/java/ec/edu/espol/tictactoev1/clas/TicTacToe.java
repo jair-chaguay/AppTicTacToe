@@ -177,6 +177,12 @@ public class TicTacToe implements Serializable {
         mostrarTablero();
         verificarEstadoJuego();
     }
+    
+    public void realizarMovimiento(String[] movimiento) {
+        int fila = Integer.parseInt(movimiento[0]);
+        int columna = Integer.parseInt(movimiento[1]);
+        setSimbolo(fila, columna);
+    }
 
     boolean esMovimientoValido(int fila, int columna) {
         if (fila >= 0 && fila < 3 && columna >= 0 && columna < 3 && tablero[fila][columna] == GameSimbol.NONE) {
