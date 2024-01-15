@@ -82,6 +82,26 @@ public class MaquinaDificil extends Jugadorr{
     public String[] getBestMoveCoordenates() {
         this.brain = generateAllValidScenarios(juegoActual, getContraryGameState(this.getSimbolo()));
         List<ArrayDeque<TicTacToe>> moves = pathToScenarios(getBestScenarios());
+        ArrayDeque<TicTacToe> bestGame = moves.get(0);
+        for (ArrayDeque<TicTacToe> game : moves) {
+            if (game.size() < bestGame.size()) {
+                bestGame = game;
+            }
+        }
+        TicTacToe desiredGame = bestGame.getLast();
+        desiredGame.mostrarTablero();
+        
+        TicTacToe cGame = this.juegoActual.copyGame();
+        cGame.mostrarTablero();
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                cGame.setGameSimbolInTablero(i, j, this.getSimbolo());
+                if (cGame.equals(desiredGame)) {
+                    return (i + "," + j).split(",");
+                }
+                cGame = this.juegoActual.copyGame();
+            }
+        }
         return null;
     }
     

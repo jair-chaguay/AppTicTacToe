@@ -7,6 +7,7 @@ import ec.edu.espol.tictactoev1.clas.MaquinaDificil;
 import ec.edu.espol.tictactoev1.clas.TicTacToe;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -31,33 +32,40 @@ public class Test {
         juego.setSimbolo(0,0); //x
         juego.setSimbolo(0,2); //o
         juego.setSimbolo(0,1); //x
-        juego.setSimbolo(1,1); //o
+//        juego.setSimbolo(1,1); //o
 //        juego.setSimbolo(2,1); //x
 //        juego.setSimbolo(0,1); //o
         System.out.println(juego.getGameState());
         juego.mostrarTablero();
+        juego.realizarMovimiento();
+        juego.mostrarTablero();
+
+//        md.setJuegoActual(juego);
+//        String[] move = md.getBestMoveCoordenates();
+//        for (String s : move) {
+//            System.out.println(s);
+//        }
 
 
-
-        md.setBrain(MaquinaDificil.generateAllValidScenarios(juego, GameState.WIN_X));
-        System.out.println(md.getBrain().countLeafs());
-
-        List<TicTacToe> list = md.getBestScenarios();
-        System.out.println(list.size());
-
-        List<ArrayDeque<TicTacToe>> a = md.pathToScenarios(list);
+//        md.setBrain(MaquinaDificil.generateAllValidScenarios(juego, GameState.WIN_X));
+//        System.out.println(md.getBrain().countLeafs());
+//
+//        List<TicTacToe> list = md.getBestScenarios();
+//        System.out.println(list.size());
+//
+//        List<ArrayDeque<TicTacToe>> a = md.pathToScenarios(list);
         
         
-        System.out.println(a.size());
+//        System.out.println(a.size());
         
 //        a.get(1).pollLast();
 //        a.get(9).peekLast().mostrarTablero();
 
-        for (ArrayDeque<TicTacToe> ad : a) {
-            ad.peekLast().mostrarTablero();
-            System.out.println(ad.size());
-            System.out.println(ad.peekFirst().getGameState());
-        }
+//        for (ArrayDeque<TicTacToe> ad : a) {
+//            ad.peekLast().mostrarTablero();
+//            System.out.println(ad.size());
+//            System.out.println(ad.peekFirst().getGameState());
+//        }
 
 //        for (ArrayDeque<TicTacToe> ad : a) {
 //            while(!ad.isEmpty()) {
@@ -71,7 +79,7 @@ public class Test {
 //            System.out.println(t.getGameState());
 //        }
 
-        System.out.println(md.allDrawScenarios(list));
+//        System.out.println(md.allDrawScenarios(list));
         
         
     }
