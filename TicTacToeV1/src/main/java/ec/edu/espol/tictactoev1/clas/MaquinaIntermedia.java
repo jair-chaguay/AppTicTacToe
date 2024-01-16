@@ -32,6 +32,7 @@ public class MaquinaIntermedia extends Jugadorr {
         this.brain = brain;
     }
 
+    //Forma teniendo las coordenaddas
     public String[] movAleatorioMejor(TicTacToe juego) {
 
         if (rd.nextBoolean()) {
@@ -41,6 +42,18 @@ public class MaquinaIntermedia extends Jugadorr {
         }
         return null;
     }
+    
+    //Haciendo con lo propuesto en el metodo MovimientosMedio
+    
+    public void movimientos(TicTacToe juego){
+        if(rd.nextBoolean()){
+            //decision
+        }else{
+            movimientosMedio(juego);
+        }
+    }
+    
+    
 
     private String[] decisionAleatoria(TicTacToe juego) {
         List<String> movimientosDisp = new ArrayList<>();
