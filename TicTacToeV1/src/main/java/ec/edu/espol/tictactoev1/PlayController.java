@@ -29,6 +29,7 @@ public class PlayController implements Initializable {
 
     public TicTacToe juego;
     public static String dificultad = "";
+    public static String turno = "";
 
     @FXML
     private ImageView imgJugador1;
@@ -99,12 +100,14 @@ public class PlayController implements Initializable {
     }
 
     private void movFacil(TicTacToe juegoTmp) {
-        MaquinaFacil mf = new MaquinaFacil(GameSimbol.O);
-        mf.setJuegoActual(juegoTmp);
-        mf.movimientosFacil(juegoTmp);
-        juegoTmp.cambiarJugador();
+        if (turno.equals("segundo")) {
+            MaquinaFacil mf = new MaquinaFacil(GameSimbol.O);
+            mf.setJuegoActual(juegoTmp);
+            mf.movimientosFacil(juegoTmp);
+            juegoTmp.cambiarJugador();
+            
+        }
         juegoFacil = true;
-
     }
 
     private void movMedio(TicTacToe juegoTmp) {
@@ -117,13 +120,13 @@ public class PlayController implements Initializable {
     }
 
     private void movDificil(TicTacToe juegoTmp) {
-
-        MaquinaDificil md = new MaquinaDificil(GameSimbol.X);
-        md.setJuegoActual(juegoTmp);
-        String[] move = md.getBestMoveCoordenates();
-        System.out.println(move[0] + move[1]);
-//        juegoTmp.realizarMovimiento(md.getBestMoveCoordenates());
-//        juegoTmp.cambiarJugador();
+        if (turno.equals("segundo")) {
+            System.out.println("hola jiji");
+            MaquinaDificil md = new MaquinaDificil(GameSimbol.X);
+            md.setJuegoActual(juegoTmp);
+            String[] move = md.getBestMoveCoordenates();
+            juego.realizarMovimiento(move);
+        }
         juegoDificil = true;
 
     }
@@ -177,13 +180,19 @@ public class PlayController implements Initializable {
                     if (juegoMedio) {
                         if (juego.getGameState() == GameState.NO_WINNER) {
                             MaquinaIntermedia mi = new MaquinaIntermedia(GameSimbol.O);
-                        }
+                        } 
                     }
                     
                     //DIFICIL
                     if (juegoDificil) {
                         if (juego.getGameState() == GameState.NO_WINNER) {
-                            MaquinaDificil md = new MaquinaDificil(GameSimbol.O);
+                            MaquinaDificil md; 
+                            if (turno.equals("primero")) {
+                                md = new MaquinaDificil(GameSimbol.O);
+                            } else {
+                                md = new MaquinaDificil(GameSimbol.X);
+                            }
+                            
                             md.setJuegoActual(juego);
                             juego.realizarMovimiento(md.getBestMoveCoordenates());
                             actualizarTablero();                            
@@ -212,6 +221,7 @@ public class PlayController implements Initializable {
                 juegoMedio = false;
                 juegoDificil = false;
                 dificultad = "";
+                turno = "";
                 try {                   
                     App.setRoot("Inicio");
                 } catch (IOException ex) {
@@ -225,6 +235,7 @@ public class PlayController implements Initializable {
             juegoMedio = false;
             juegoDificil = false;
             dificultad = "";
+            turno = "";
             try {
                 App.setRoot("Inicio");
             } catch (IOException ex) {

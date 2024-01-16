@@ -106,9 +106,9 @@ public class DificultadController implements Initializable {
 
         if (isSelected) {
             if (radioPrimero.isSelected()) {
-                PlayController.jugador1 = new Jugadorr(GameSimbol.X);
+                PlayController.turno = "primero";
             } else if (radioSegundo.isSelected()) {
-                PlayController.jugador1 = new Jugadorr(GameSimbol.O);
+                PlayController.turno = "segundo";
 
             }
         }
