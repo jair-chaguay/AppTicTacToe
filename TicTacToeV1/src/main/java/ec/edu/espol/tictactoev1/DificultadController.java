@@ -63,13 +63,21 @@ public class DificultadController implements Initializable {
         }
     }
 
+    
     @FXML
-    private void jugar(MouseEvent evt) {
-        try {
-            App.setRoot("Play");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+    private void nivelFacil(MouseEvent evt){
+        
+       
+    }
+    
+    @FXML
+    private void nivelIntermedio(MouseEvent evt){
+    
+    }
+    
+    @FXML
+    private void nivelDificil(MouseEvent evt){
+    
     }
 
     @FXML

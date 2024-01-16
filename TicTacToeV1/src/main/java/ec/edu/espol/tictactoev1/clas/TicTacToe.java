@@ -48,22 +48,24 @@ public class TicTacToe implements Serializable {
         this.gameState = GameState.NO_WINNER;
 
     }
+    
+    public TicTacToe(Jugadorr jugador1, MaquinaFacil jugador2) {
+        this.jugador1 = jugador1;
+        this.jugador2 = jugador2;
+        this.jugadorActual = jugador1;
+        this.tablero = new GameSimbol[3][3];
 
-//    public TicTacToe(Jugadorr jugador1, Maquina maquina) {
-//        this.jugador1 = jugador1;
-//        this.maquina = maquina;
-//        this.jugadorActual = jugador1;
-//        this.tablero = new GameSimbol[3][3];
-//
-//         Inicializar el tablero con GameSimbol.NONE
-//        for (int i = 0; i < 3; i++) {
-//            for (int j = 0; j < 3; j++) {
-//                tablero[i][j] = GameSimbol.NONE;
-//            }
-//        }
-//
-//        this.gameState = GameState.NO_WINNER;
-//    }
+        // Inicializar el tablero con GameSimbol.NONE
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                tablero[i][j] = GameSimbol.NONE;
+            }
+        }
+
+        this.gameState = GameState.NO_WINNER;
+
+    }
+
     public void resetTablero() {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -193,6 +195,20 @@ public class TicTacToe implements Serializable {
             //manejarError("Movimiento no válido. Intente nuevamente.");
             return false;
         }
+    }
+
+    public List<int[]> movimientosDisponibles() {
+        List<int[]> movimientos = new ArrayList<>();
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (esMovimientoValido(i, j)) {
+                    movimientos.add(new int[]{i, j});
+                }
+            }
+        }
+
+        return movimientos;
     }
 
     private void manejarError(String mensaje) {

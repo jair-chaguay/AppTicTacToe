@@ -25,7 +25,7 @@ public class Maquina extends Jugadorr {
     }
 
     private int[] minimax(TicTacToe juego, GameSimbol jugador) {
-        List<int[]> movimientosDisponibles = obtenerMovimientosDisponibles(juego);
+        List<int[]> movimientosDisponibles = juego.movimientosDisponibles();
 
         int mejorPuntaje = (jugador == this.getSimbolo()) ? Integer.MIN_VALUE : Integer.MAX_VALUE;
         int mejorMovimientoIndex = -1;
@@ -68,7 +68,7 @@ public class Maquina extends Jugadorr {
         GameSimbol jugadorMax = this.getSimbolo();
         int mejorPuntaje = (esMaximizando) ? Integer.MIN_VALUE : Integer.MAX_VALUE;
 
-        List<int[]> movimientosDisponibles = obtenerMovimientosDisponibles(juego);
+        List<int[]> movimientosDisponibles = juego.movimientosDisponibles();
 
         for (int[] movimiento : movimientosDisponibles) {
             juego.setSimbolo(movimiento[0], movimiento[1]);
@@ -83,17 +83,5 @@ public class Maquina extends Jugadorr {
         return mejorPuntaje;
     }
 
-    private List<int[]> obtenerMovimientosDisponibles(TicTacToe juego) {
-        List<int[]> movimientos = new ArrayList<>();
-
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                if (juego.esMovimientoValido(i, j)) {
-                    movimientos.add(new int[]{i, j});
-                }
-            }
-        }
-
-        return movimientos;
-    }
+    
 }

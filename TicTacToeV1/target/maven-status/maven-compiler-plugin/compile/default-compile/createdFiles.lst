@@ -4,6 +4,7 @@ module-info.class
 Trees\Tree$TreeNode.class
 ec\edu\espol\tictactoev1\App.class
 ec\edu\espol\tictactoev1\clas\TicTacToe.class
+ec\edu\espol\tictactoev1\clas\MaquinaFacil.class
 ec\edu\espol\tictactoev1\clas\GameSimbol.class
 ec\edu\espol\tictactoev1\InicioController.class
 Trees\Tree.class
