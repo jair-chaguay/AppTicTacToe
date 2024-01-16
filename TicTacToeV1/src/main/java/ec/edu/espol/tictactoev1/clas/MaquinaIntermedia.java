@@ -36,7 +36,8 @@ public class MaquinaIntermedia extends Jugadorr {
     public String[] movAleatorioMejor(TicTacToe juego) {
 
         if (rd.nextBoolean()) {
-            //aqui toma la decision de la maquina dificil pero a veces segun lo random;
+            maqDif.setJuegoActual(juego);
+            return maqDif.getBestMoveCoordenates();
         } else {
             decisionAleatoria(juego);
         }
@@ -48,6 +49,8 @@ public class MaquinaIntermedia extends Jugadorr {
     public void movimientos(TicTacToe juego){
         if(rd.nextBoolean()){
             //decision
+            maqDif.setJuegoActual(juego);
+            return maqDif.getBestMoveCoordenates();
         }else{
             movimientosMedio(juego);
         }
