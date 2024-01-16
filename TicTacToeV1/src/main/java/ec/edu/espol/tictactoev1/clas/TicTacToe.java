@@ -111,8 +111,9 @@ public class TicTacToe implements Serializable {
         return jugadorActual;
     }
 
+    static int c = 0;
     public void cambiarJugador() {
-
+        System.out.println(c++);
         if (jugadorActual == jugador1) {
             jugadorActual = jugador2;
         } else {

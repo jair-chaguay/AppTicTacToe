@@ -28,7 +28,7 @@ import javafx.stage.Stage;
 public class PlayController implements Initializable {
 
     public TicTacToe juego;
-    public static String dificultad;
+    public static String dificultad = "";
 
     @FXML
     private ImageView imgJugador1;
@@ -52,8 +52,7 @@ public class PlayController implements Initializable {
         juego = new TicTacToe(jugador1, jugador2);
         crearCuadros();
         iniciarPartida(juego,dificultad);
-        
-
+        System.out.println(juegoFacil);
     }
 
     @FXML
@@ -128,7 +127,8 @@ public class PlayController implements Initializable {
     public void iniciarPartida(TicTacToe juego, String nivel) {
         if (nivel.equals("facil")) {
             movFacil(juego);
-            juego.cambiarJugador();
+//            juegoFacil = true;
+//            juego.cambiarJugador();
         }
         if (nivel.equals("medio")) {
             movMedio(juego);
@@ -136,7 +136,7 @@ public class PlayController implements Initializable {
         if (nivel.equals("dificil")) {
             movDificil(juego);
         }
-        juego.cambiarJugador();
+//        juego.cambiarJugador();
         actualizarTablero();
         
     }
@@ -158,7 +158,7 @@ public class PlayController implements Initializable {
                     mostrarResultadoDelJuego();
                     
                     //FACIL
-                    if (juegoFacil == true) {
+                    if (juegoFacil) {
                         if (juego.getGameState() == GameState.NO_WINNER) {
                             MaquinaFacil mf = new MaquinaFacil(GameSimbol.O);
                             mf.setJuegoActual(juego);
@@ -170,14 +170,14 @@ public class PlayController implements Initializable {
                     }
                     
                     //MEDIO
-                    if (juegoMedio == true) {
+                    if (juegoMedio) {
                         if (juego.getGameState() == GameState.NO_WINNER) {
                             //
                         }
                     }
                     
                     //DIFICIL
-                    if (juegoDificil == true) {
+                    if (juegoDificil) {
                         if (juego.getGameState() == GameState.NO_WINNER) {
                             MaquinaDificil md = new MaquinaDificil(GameSimbol.O);
                             juego.realizarMovimiento(md.getBestMoveCoordenates());
@@ -205,15 +205,23 @@ public class PlayController implements Initializable {
             Optional<ButtonType> result = alert.showAndWait();
 
             if (result.isPresent() && result.get() == ButtonType.OK) {
-                try {
+                juegoFacil = false;
+                juegoMedio = false;
+                juegoDificil = false;
+                dificultad = "";
+                try {                   
                     App.setRoot("Inicio");
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
             } else {
                 alert.close();
-            }
+            }           
         } else {
+            juegoFacil = false;
+            juegoMedio = false;
+            juegoDificil = false;
+            dificultad = "";
             try {
                 App.setRoot("Inicio");
             } catch (IOException ex) {
