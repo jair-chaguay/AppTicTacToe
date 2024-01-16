@@ -66,9 +66,14 @@ public class DificultadController implements Initializable {
 
     @FXML
     private void nivelFacil(MouseEvent evt) {
-
-        TicTacToe juego = new TicTacToe(jugador1, jugador2);
-        cargarVista(juego, "facil");
+//
+//        TicTacToe juego = new TicTacToe(jugador1, jugador2);
+//        cargarVista(juego, "facil");
+        try {
+            App.setRoot("Play");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
 
     }
 
@@ -94,14 +99,16 @@ public class DificultadController implements Initializable {
             Parent root = loader.load();
             PlayController playController = loader.getController();
             playController.iniciarPartida(juego, nivel);
-
+            playController.ocultar();
+            Stage currentStage = (Stage) btnFacil.getScene().getWindow();
+            currentStage.hide(); 
             Stage stage = new Stage();
             Scene scene = new Scene(root);
             stage.setScene(scene);
+            stage.setOnCloseRequest(event -> {
+                currentStage.show(); 
+            });
             stage.show();
-
-            Stage currentStage = (Stage) btnFacil.getScene().getWindow();
-            currentStage.close();
         } catch (IOException ex) {
             ex.printStackTrace();
         }

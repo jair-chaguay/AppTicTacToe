@@ -15,12 +15,14 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public class PlayController implements Initializable {
 
@@ -32,6 +34,8 @@ public class PlayController implements Initializable {
     private ImageView imgJugador2;
     @FXML
     private Pane background;
+    @FXML
+    private ImageView atras;
 
     private boolean juegoFacil = false;
     private boolean juegoMedio = false;
@@ -120,7 +124,7 @@ public class PlayController implements Initializable {
 
     @FXML
     private void inicio(MouseEvent evt) {
-        if (!juego.isPartidaGuardada()) {
+       if (!juego.isPartidaGuardada()) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setContentText("¿Desea salir sin guardar la partida?");
 
@@ -141,7 +145,11 @@ public class PlayController implements Initializable {
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-        }
+        } 
+    }
+    public void ocultar() {
+       
+        atras.setVisible(false);
     }
 
     private void eventPane(Pane p, ImageView imgView) {
