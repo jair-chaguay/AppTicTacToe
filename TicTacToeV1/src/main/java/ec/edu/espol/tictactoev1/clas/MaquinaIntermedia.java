@@ -43,20 +43,17 @@ public class MaquinaIntermedia extends Jugadorr {
         }
         return null;
     }
-    
+
     //Haciendo con lo propuesto en el metodo MovimientosMedio
-    
-    public void movimientos(TicTacToe juego){
-        if(rd.nextBoolean()){
+    public void movimientos(TicTacToe juego) {
+        if (rd.nextBoolean()) {
             //decision
             maqDif.setJuegoActual(juego);
             return maqDif.getBestMoveCoordenates();
-        }else{
+        } else {
             movimientosMedio(juego);
         }
     }
-    
-    
 
     private String[] decisionAleatoria(TicTacToe juego) {
         List<String> movimientosDisp = new ArrayList<>();
@@ -71,7 +68,7 @@ public class MaquinaIntermedia extends Jugadorr {
             int indiceAleatorio = rd.nextInt(movimientosDisp.size());
             return movimientosDisp.get(indiceAleatorio).split(",");
 
-        }else{
+        } else {
             return null;
         }
     }
