@@ -131,6 +131,11 @@ public class MaquinaDificil extends Jugadorr{
         return null;
     }
     
+    public void movimientosDificil(TicTacToe juego, String[] move){
+    
+    
+    }
+    
     public boolean allDrawScenarios(List<TicTacToe> juegos) {
         for (TicTacToe t : juegos) {
             if (t.getGameState() != GameState.DRAW) {

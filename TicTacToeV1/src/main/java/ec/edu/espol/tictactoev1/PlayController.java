@@ -41,12 +41,14 @@ public class PlayController implements Initializable {
     private boolean juegoMedio = false;
     private boolean juegoDificil = false;
 
+    public static Jugadorr jugador1 = new Jugadorr("Jugador1", GameSimbol.X);
+    public static Jugadorr jugador2 = new Jugadorr("Jugador2", GameSimbol.O);
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        Jugadorr jugador1 = new Jugadorr("Jugador1", GameSimbol.X);
-        Jugadorr jugador2 = new Jugadorr("Jugador2", GameSimbol.O);
         juego = new TicTacToe(jugador1, jugador2);
+
         crearCuadros();
 
     }
@@ -94,37 +96,52 @@ public class PlayController implements Initializable {
         mostrarResultadoDelJuego();
     }
 
+    private void movFacil(TicTacToe juegoTmp) {
+        MaquinaFacil mf = new MaquinaFacil(GameSimbol.O);
+        mf.setJuegoActual(juegoTmp);
+        mf.movimientosFacil(juegoTmp);
+        juegoTmp.cambiarJugador();
+        juegoFacil = true;
+
+    }
+
+    private void movMedio(TicTacToe juegoTmp) {
+        //
+        juegoMedio = true;
+
+    }
+
+    private void movDificil(TicTacToe juegoTmp) {
+
+        MaquinaDificil md = new MaquinaDificil(GameSimbol.O);
+        juegoTmp.realizarMovimiento(md.getBestMoveCoordenates());
+        juegoTmp.cambiarJugador();
+        juegoDificil = true;
+
+    }
+
     public void iniciarPartida(TicTacToe juego, String nivel) {
-        this.juego = juego;
+
+        TicTacToe juegoTmp = new TicTacToe(jugador1, jugador2);
 
         if (nivel.equals("facil")) {
-            MaquinaFacil mf = new MaquinaFacil(GameSimbol.O);
-            mf.setJuegoActual(juego);
-            mf.movimientosFacil(juego);
-            juegoFacil = true;
+            movFacil(juegoTmp);
         }
 
         if (nivel.equals("medio")) {
-            //
-            juegoMedio = true;
+            movMedio(juegoTmp);
         }
         if (nivel.equals("dificil")) {
-
-            MaquinaDificil md = new MaquinaDificil(GameSimbol.O);
-            juego.realizarMovimiento(md.getBestMoveCoordenates());
-            juego.realizarMovimiento();
-            juegoDificil = true;
+            movDificil(juegoTmp);
         }
-
         actualizarTablero();
-        juego.cambiarJugador();
+        juegoTmp.cambiarJugador();
         mostrarResultadoDelJuego();
-
     }
 
     @FXML
     private void inicio(MouseEvent evt) {
-       if (!juego.isPartidaGuardada()) {
+        if (!juego.isPartidaGuardada()) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setContentText("¿Desea salir sin guardar la partida?");
 
@@ -145,10 +162,11 @@ public class PlayController implements Initializable {
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-        } 
+        }
     }
+
     public void ocultar() {
-       
+
         atras.setVisible(false);
     }
 

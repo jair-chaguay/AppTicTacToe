@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class TicTacToe implements Serializable {
+    
 
     private GameSimbol[][] tablero;
     private GameState gameState;
@@ -23,25 +24,9 @@ public class TicTacToe implements Serializable {
     private Jugadorr jugador2;
     private Jugadorr jugadorActual;
     private boolean partidaGuardada;
+   
 
     public TicTacToe(Jugadorr jugador1, Jugadorr jugador2) {
-        this.jugador1 = jugador1;
-        this.jugador2 = jugador2;
-        this.jugadorActual = jugador1;
-        this.tablero = new GameSimbol[3][3];
-
-        // Inicializar el tablero con GameSimbol.NONE
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                tablero[i][j] = GameSimbol.NONE;
-            }
-        }
-
-        this.gameState = GameState.NO_WINNER;
-
-    }
-
-    public TicTacToe(Jugadorr jugador1, MaquinaFacil jugador2) {
         this.jugador1 = jugador1;
         this.jugador2 = jugador2;
         this.jugadorActual = jugador1;
@@ -70,7 +55,7 @@ public class TicTacToe implements Serializable {
     public boolean setSimbolo(int i, int j) {
         if (gameState == GameState.NO_WINNER) {
             if (esMovimientoValido(i, j)) {
-                tablero[i][j] = jugadorActual.getSimbolo();
+                tablero[i][j] = jugadorActual.getSimbolo() != null ? jugadorActual.getSimbolo() : GameSimbol.NONE;
                 cambiarJugador();
                 verificarEstadoJuego();
                 return true;
@@ -214,7 +199,7 @@ public class TicTacToe implements Serializable {
             if (jugadorActual == null) {
                 System.out.println("¡" + "Maquina" + " ha ganado!");
             } else {
-                System.out.println("¡" + jugadorActual.getNombre() + " ha ganado!");
+                System.out.println("¡" + "Jugador1" + " ha ganado!");
             }
 
         } else if (gameState == GameState.DRAW) {
@@ -232,6 +217,7 @@ public class TicTacToe implements Serializable {
 
     //LLENA  EL TXT
     public void guardarJuego(String archivo) {
+
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/" + archivo, true))) {
             if (jugador1.getNombre() == null) {
                 writer.write("Maquina" + "/" + jugador1.getSimbolo() + "/");
@@ -249,7 +235,7 @@ public class TicTacToe implements Serializable {
                 }
             }
             writer.write(jugadorActual.getNombre() + "/");
-            writer.write(gameState.toString());
+            writer.write(gameState.toString());       
             writer.newLine();
             writer.close();
 

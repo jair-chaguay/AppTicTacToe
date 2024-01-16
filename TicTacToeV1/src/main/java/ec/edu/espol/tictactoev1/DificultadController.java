@@ -6,7 +6,6 @@ package ec.edu.espol.tictactoev1;
 
 import ec.edu.espol.tictactoev1.clas.GameSimbol;
 import ec.edu.espol.tictactoev1.clas.Jugadorr;
-import ec.edu.espol.tictactoev1.clas.MaquinaFacil;
 import ec.edu.espol.tictactoev1.clas.TicTacToe;
 import java.io.IOException;
 import java.net.URL;
@@ -41,7 +40,7 @@ public class DificultadController implements Initializable {
 
     @FXML
     private ToggleGroup eleccion;
-
+//
     public static Jugadorr jugador1 = new Jugadorr();
     public static Jugadorr jugador2 = new Jugadorr();
 
@@ -67,7 +66,7 @@ public class DificultadController implements Initializable {
     @FXML
     private void nivelFacil(MouseEvent evt) {
 
-        TicTacToe juego = new TicTacToe(jugador1, jugador2);
+        TicTacToe juego = new TicTacToe(PlayController.jugador1, PlayController.jugador2);
         cargarVista(juego, "facil");
      
     }
@@ -75,7 +74,7 @@ public class DificultadController implements Initializable {
     @FXML
     private void nivelMedio(MouseEvent evt) {
 
-        TicTacToe juego = new TicTacToe(jugador1, jugador2);
+        TicTacToe juego = new TicTacToe(PlayController.jugador1, PlayController.jugador2);
         cargarVista(juego, "medio");
 
     }
@@ -83,7 +82,7 @@ public class DificultadController implements Initializable {
     @FXML
     private void nivelDificil(MouseEvent evt) {
 
-        TicTacToe juego = new TicTacToe(jugador1, jugador2);
+        TicTacToe juego = new TicTacToe(PlayController.jugador1, PlayController.jugador2);
         cargarVista(juego, "dificil");
 
     }
@@ -121,7 +120,8 @@ public class DificultadController implements Initializable {
             if (radioPrimero.isSelected()) {
                 jugador1 = new Jugadorr(GameSimbol.X);
             } else if (radioSegundo.isSelected()) {
-                jugador1 = new Jugadorr(GameSimbol.O);
+                jugador2 = new Jugadorr(GameSimbol.O);
+                
             }
         }
     }
