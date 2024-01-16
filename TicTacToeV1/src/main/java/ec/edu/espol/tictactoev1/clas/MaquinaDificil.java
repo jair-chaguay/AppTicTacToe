@@ -91,7 +91,7 @@ public class MaquinaDificil extends Jugadorr{
     public String[] getBestMoveCoordenates() {
         this.brain = generateAllValidScenarios(juegoActual, getContraryGameState(this.getSimbolo()));
         List<ArrayDeque<TicTacToe>> moves = pathToScenarios(getBestScenarios());
-        if (moves.size() == 0) return new String[] {"-1","-1"};
+        if (moves.isEmpty()) return new String[] {"-1","-1"};
         ArrayDeque<TicTacToe> bestGame = moves.get(0);
         for (ArrayDeque<TicTacToe> game : moves) {           
             if (game.size() < bestGame.size()) {
@@ -103,6 +103,14 @@ public class MaquinaDificil extends Jugadorr{
         
         TicTacToe cGame = this.juegoActual.copyGame();
 //        cGame.mostrarTablero();
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (oneMoveToWin(juegoActual, this.getSimbolo(), i, j)) {
+                    return (i +"," +j).split(",");
+                }
+                
+            }
+        }
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if (oneMoveToWin(juegoActual, getContraryGameSimbol(this.getSimbolo()), i, j)) {
