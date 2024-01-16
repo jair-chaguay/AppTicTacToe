@@ -1,15 +1,63 @@
 package ec.edu.espol.tictactoev1.clas;
 
 import Trees.Tree;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class MaquinaIntermedia extends Jugadorr {
 
+    private Tree<TicTacToe> brain;
+    private TicTacToe juegoActual;
+    private Random rd;
+    MaquinaDificil maqDif;
+
     public MaquinaIntermedia(GameSimbol simbol) {
         super(simbol);
         this.setNombre("Maquina intermedia");
+        this.rd = new Random();
+        this.maqDif = new MaquinaDificil(simbol);
 
+    }
+
+    public void setJuegoActual(TicTacToe juegoActual) {
+        this.juegoActual = juegoActual;
+    }
+
+    public Tree<TicTacToe> getBrain() {
+        return brain;
+    }
+
+    public void setBrain(Tree<TicTacToe> brain) {
+        this.brain = brain;
+    }
+
+    public String[] movAleatorioMejor(TicTacToe juego) {
+
+        if (rd.nextBoolean()) {
+            //aqui toma la decision de la maquina dificil pero a veces segun lo random;
+        } else {
+            decisionAleatoria(juego);
+        }
+        return null;
+    }
+
+    private String[] decisionAleatoria(TicTacToe juego) {
+        List<String> movimientosDisp = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (juego.getGameSimbol(i, j) == GameSimbol.NONE) {
+                    movimientosDisp.add(i + "," + j); //añade las posiciones disponibles
+                }
+            }
+        }
+        if (!movimientosDisp.isEmpty()) {
+            int indiceAleatorio = rd.nextInt(movimientosDisp.size());
+            return movimientosDisp.get(indiceAleatorio).split(",");
+
+        }else{
+            return null;
+        }
     }
 
     public void movimientosMedio(TicTacToe juego) {
