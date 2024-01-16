@@ -5,6 +5,7 @@ import ec.edu.espol.tictactoev1.clas.GameState;
 import ec.edu.espol.tictactoev1.clas.Jugadorr;
 import ec.edu.espol.tictactoev1.clas.MaquinaDificil;
 import ec.edu.espol.tictactoev1.clas.MaquinaFacil;
+import ec.edu.espol.tictactoev1.clas.MaquinaIntermedia;
 import ec.edu.espol.tictactoev1.clas.TicTacToe;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -106,7 +107,9 @@ public class PlayController implements Initializable {
     }
 
     private void movMedio(TicTacToe juegoTmp) {
-        //
+        MaquinaIntermedia mi = new MaquinaIntermedia(GameSimbol.O);
+        juegoTmp.realizarMovimiento(mi.movAleatorioMejor(juego));
+        juegoTmp.cambiarJugador();
         juegoMedio = true;
 
     }

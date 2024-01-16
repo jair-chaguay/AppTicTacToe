@@ -44,16 +44,6 @@ public class MaquinaIntermedia extends Jugadorr {
         return null;
     }
 
-    //Haciendo con lo propuesto en el metodo MovimientosMedio
-    public void movimientos(TicTacToe juego) {
-        if (rd.nextBoolean()) {
-            //decision
-            maqDif.setJuegoActual(juego);
-            return maqDif.getBestMoveCoordenates();
-        } else {
-            movimientosMedio(juego);
-        }
-    }
 
     private String[] decisionAleatoria(TicTacToe juego) {
         List<String> movimientosDisp = new ArrayList<>();
