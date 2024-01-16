@@ -39,9 +39,7 @@ public class Test {
         juego.mostrarTablero();
         md.setJuegoActual(juego);
         
-        while (juego.getGameState() == GameState.NO_WINNER || juego.getGameState() != GameState.DRAW) {
-            
-            
+        while (juego.getGameState() == GameState.NO_WINNER) {
             
             juego.realizarMovimiento(md.getBestMoveCoordenates());
             juego.realizarMovimiento();
