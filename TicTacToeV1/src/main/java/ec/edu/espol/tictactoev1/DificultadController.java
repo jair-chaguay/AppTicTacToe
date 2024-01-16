@@ -66,26 +66,34 @@ public class DificultadController implements Initializable {
 
     @FXML
     private void nivelFacil(MouseEvent evt) {
-      
-        if (radioPrimero.isSelected()) {
-            jugador1 = new Jugadorr(GameSimbol.X);
-            jugador2 = new Jugadorr("Jugador2", GameSimbol.O);
-        } else {
-            jugador1 = new Jugadorr(GameSimbol.O);
-            jugador2 = new Jugadorr("Jugador2", GameSimbol.X);
-        }
 
         TicTacToe juego = new TicTacToe(jugador1, jugador2);
-        cargarVista(juego);
+        cargarVista(juego, "facil");
 
     }
 
-    private void cargarVista(TicTacToe juego) {
+    @FXML
+    private void nivelMedio(MouseEvent evt) {
+
+        TicTacToe juego = new TicTacToe(jugador1, jugador2);
+        cargarVista(juego, "medio");
+
+    }
+
+    @FXML
+    private void nivelDificil(MouseEvent evt) {
+
+        TicTacToe juego = new TicTacToe(jugador1, jugador2);
+        cargarVista(juego, "dificil");
+
+    }
+
+    private void cargarVista(TicTacToe juego, String nivel) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Play.fxml"));
             Parent root = loader.load();
             PlayController playController = loader.getController();
-            playController.iniciarPartida(juego);
+            playController.iniciarPartida(juego, nivel);
 
             Stage stage = new Stage();
             Scene scene = new Scene(root);

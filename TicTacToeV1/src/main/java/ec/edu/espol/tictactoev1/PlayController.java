@@ -3,6 +3,7 @@ package ec.edu.espol.tictactoev1;
 import ec.edu.espol.tictactoev1.clas.GameSimbol;
 import ec.edu.espol.tictactoev1.clas.GameState;
 import ec.edu.espol.tictactoev1.clas.Jugadorr;
+import ec.edu.espol.tictactoev1.clas.MaquinaDificil;
 import ec.edu.espol.tictactoev1.clas.MaquinaFacil;
 import ec.edu.espol.tictactoev1.clas.TicTacToe;
 import java.io.FileInputStream;
@@ -33,6 +34,8 @@ public class PlayController implements Initializable {
     private Pane background;
 
     private boolean juegoFacil = false;
+    private boolean juegoMedio = false;
+    private boolean juegoDificil = false;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -87,23 +90,32 @@ public class PlayController implements Initializable {
         mostrarResultadoDelJuego();
     }
 
-    public void iniciarPartida(TicTacToe juego) {
+    public void iniciarPartida(TicTacToe juego, String nivel) {
         this.juego = juego;
 
-        MaquinaFacil mf;
-
-        if (DificultadController.jugador1.getSimbolo() == GameSimbol.X) {
-            mf = new MaquinaFacil(GameSimbol.O);
-        } else {
-            mf = new MaquinaFacil(GameSimbol.X);
+        if (nivel.equals("facil")) {
+            MaquinaFacil mf = new MaquinaFacil(GameSimbol.O);
+            mf.setJuegoActual(juego);
+            mf.movimientosFacil(juego);
+            juegoFacil = true;
         }
 
-        mf.setJuegoActual(juego);
-        mf.movimientosFacil(juego);
+        if (nivel.equals("medio")) {
+            //
+            juegoMedio = true;
+        }
+        if (nivel.equals("dificil")) {
+
+            MaquinaDificil md = new MaquinaDificil(GameSimbol.O);
+            juego.realizarMovimiento(md.getBestMoveCoordenates());
+            juego.realizarMovimiento();
+            juegoDificil = true;
+        }
+
         actualizarTablero();
         juego.cambiarJugador();
         mostrarResultadoDelJuego();
-        juegoFacil = true;
+
     }
 
     @FXML
@@ -158,7 +170,24 @@ public class PlayController implements Initializable {
                             mostrarResultadoDelJuego();
                         }
                     }
-                    //
+                    //MEDIO
+                    if (juegoMedio == true) {
+                        if (juego.getGameState() == GameState.NO_WINNER) {
+                            //
+                        }
+                    }
+                    //DIFICIL
+                    if (juegoDificil == true) {
+                        if (juego.getGameState() == GameState.NO_WINNER) {
+                            MaquinaDificil md = new MaquinaDificil(GameSimbol.O);
+                            juego.realizarMovimiento(md.getBestMoveCoordenates());
+                            juego.realizarMovimiento();
+                            actualizarTablero();
+                            juego.cambiarJugador();
+                            mostrarResultadoDelJuego();
+                        }
+                    }
+
                 } else {
                     System.out.println("Movimiento no válido. Intente nuevamente.");
                 }
