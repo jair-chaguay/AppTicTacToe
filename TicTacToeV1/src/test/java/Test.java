@@ -32,14 +32,15 @@ public class Test {
         juego.mostrarTablero();
         md.setJuegoActual(juego);
         
-        if (md.getSimbolo() == GameSimbol.X) {
-            juego.realizarMovimiento(md.getBestMoveCoordenates());
-            juego.realizarMovimiento();
-        } else {
-            juego.realizarMovimiento();
-            juego.realizarMovimiento(md.getBestMoveCoordenates());
+        while (juego.getGameState() == GameState.NO_WINNER) {
+            if (md.getSimbolo() == GameSimbol.X) {
+                juego.realizarMovimiento(md.getBestMoveCoordenates());
+                juego.realizarMovimiento();
+            } else {
+                juego.realizarMovimiento();
+                juego.realizarMovimiento(md.getBestMoveCoordenates());
+            }
         }
-        
 //        while (juego.getGameState() == GameState.NO_WINNER) {
 //            
 //            
