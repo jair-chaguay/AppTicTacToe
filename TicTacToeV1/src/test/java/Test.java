@@ -16,7 +16,7 @@ import ec.edu.espol.tictactoev1.clas.TicTacToe;
  */
 public class Test {
     public static void main(String[] args) {
-        MaquinaDificil md = new MaquinaDificil(GameSimbol.X);
+        MaquinaDificil md = new MaquinaDificil(GameSimbol.O);
 
         Jugadorr j1 = new Jugadorr("j1", GameSimbol.X);
         Jugadorr j2 = new Jugadorr("j2", GameSimbol.O);
@@ -32,11 +32,20 @@ public class Test {
         juego.mostrarTablero();
         md.setJuegoActual(juego);
         
-        while (juego.getGameState() == GameState.NO_WINNER) {
-            
+        if (md.getSimbolo() == GameSimbol.X) {
             juego.realizarMovimiento(md.getBestMoveCoordenates());
             juego.realizarMovimiento();
+        } else {
+            juego.realizarMovimiento();
+            juego.realizarMovimiento(md.getBestMoveCoordenates());
         }
+        
+//        while (juego.getGameState() == GameState.NO_WINNER) {
+//            
+//            
+//            juego.realizarMovimiento();
+//            juego.realizarMovimiento(md.getBestMoveCoordenates());
+//        }
         
         
         
