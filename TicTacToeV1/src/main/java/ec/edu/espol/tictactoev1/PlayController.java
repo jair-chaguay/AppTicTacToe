@@ -52,7 +52,7 @@ public class PlayController implements Initializable {
         juego = new TicTacToe(jugador1, jugador2);
         crearCuadros();
         iniciarPartida(juego,dificultad);
-        System.out.println(juegoFacil);
+        
     }
 
     @FXML
@@ -108,7 +108,8 @@ public class PlayController implements Initializable {
     }
 
     private void movMedio(TicTacToe juegoTmp) {
-        MaquinaIntermedia mi = new MaquinaIntermedia(GameSimbol.O);
+        MaquinaIntermedia mi = new MaquinaIntermedia(GameSimbol.X);
+        mi.setJuegoActual(juegoTmp);
         juegoTmp.realizarMovimiento(mi.movAleatorioMejor(juego));
         juegoTmp.cambiarJugador();
         juegoMedio = true;
@@ -117,9 +118,12 @@ public class PlayController implements Initializable {
 
     private void movDificil(TicTacToe juegoTmp) {
 
-        MaquinaDificil md = new MaquinaDificil(GameSimbol.O);
-        juegoTmp.realizarMovimiento(md.getBestMoveCoordenates());
-        juegoTmp.cambiarJugador();
+        MaquinaDificil md = new MaquinaDificil(GameSimbol.X);
+        md.setJuegoActual(juegoTmp);
+        String[] move = md.getBestMoveCoordenates();
+        System.out.println(move[0] + move[1]);
+//        juegoTmp.realizarMovimiento(md.getBestMoveCoordenates());
+//        juegoTmp.cambiarJugador();
         juegoDificil = true;
 
     }
@@ -172,7 +176,7 @@ public class PlayController implements Initializable {
                     //MEDIO
                     if (juegoMedio) {
                         if (juego.getGameState() == GameState.NO_WINNER) {
-                            //
+                            MaquinaIntermedia mi = new MaquinaIntermedia(GameSimbol.O);
                         }
                     }
                     
@@ -180,10 +184,9 @@ public class PlayController implements Initializable {
                     if (juegoDificil) {
                         if (juego.getGameState() == GameState.NO_WINNER) {
                             MaquinaDificil md = new MaquinaDificil(GameSimbol.O);
+                            md.setJuegoActual(juego);
                             juego.realizarMovimiento(md.getBestMoveCoordenates());
-                            juego.realizarMovimiento();
-                            actualizarTablero();
-                            juego.cambiarJugador();
+                            actualizarTablero();                            
                             mostrarResultadoDelJuego();
                         }
                     }
