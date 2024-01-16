@@ -1,16 +1,9 @@
 
-import Trees.Tree;
 import ec.edu.espol.tictactoev1.clas.GameSimbol;
 import ec.edu.espol.tictactoev1.clas.GameState;
 import ec.edu.espol.tictactoev1.clas.Jugadorr;
 import ec.edu.espol.tictactoev1.clas.MaquinaDificil;
 import ec.edu.espol.tictactoev1.clas.TicTacToe;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -96,4 +89,3 @@ public class Test {
         
     }
 }
-
