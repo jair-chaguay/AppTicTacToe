@@ -111,10 +111,13 @@ public class PlayController implements Initializable {
     }
 
     private void movMedio(TicTacToe juegoTmp) {
-        MaquinaIntermedia mi = new MaquinaIntermedia(GameSimbol.X);
-        mi.setJuegoActual(juegoTmp);
-        juegoTmp.realizarMovimiento(mi.movAleatorioMejor(juego));
-        juegoTmp.cambiarJugador();
+        if (turno.equals("segundo")) {
+            MaquinaIntermedia mi = new MaquinaIntermedia(GameSimbol.X);
+            mi.setJuegoActual(juegoTmp);
+            juegoTmp.realizarMovimiento(mi.movAleatorioMejor());
+        }
+        
+//        juegoTmp.cambiarJugador();
         juegoMedio = true;
 
     }
@@ -179,7 +182,16 @@ public class PlayController implements Initializable {
                     //MEDIO
                     if (juegoMedio) {
                         if (juego.getGameState() == GameState.NO_WINNER) {
-                            MaquinaIntermedia mi = new MaquinaIntermedia(GameSimbol.O);
+                            MaquinaIntermedia mi; 
+                            if (turno.equals("primero")) {
+                                mi = new MaquinaIntermedia(GameSimbol.O);
+                            } else {
+                                mi = new MaquinaIntermedia(GameSimbol.X);
+                            }
+                            mi.setJuegoActual(juego);
+                            juego.realizarMovimiento(mi.movAleatorioMejor());
+                            actualizarTablero(); 
+                            mostrarResultadoDelJuego();
                         } 
                     }
                     

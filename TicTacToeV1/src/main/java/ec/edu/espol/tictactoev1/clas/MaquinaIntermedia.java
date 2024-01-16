@@ -22,6 +22,7 @@ public class MaquinaIntermedia extends Jugadorr {
 
     public void setJuegoActual(TicTacToe juegoActual) {
         this.juegoActual = juegoActual;
+        maqDif.setJuegoActual(juegoActual);
     }
 
     public Tree<TicTacToe> getBrain() {
@@ -33,15 +34,13 @@ public class MaquinaIntermedia extends Jugadorr {
     }
 
     //Forma teniendo las coordenaddas
-    public String[] movAleatorioMejor(TicTacToe juego) {
+    public String[] movAleatorioMejor() {
 
-        if (rd.nextBoolean()) {
-            maqDif.setJuegoActual(juego);
+        if (rd.nextBoolean()) {           
             return maqDif.getBestMoveCoordenates();
         } else {
-            decisionAleatoria(juego);
+            return decisionAleatoria(this.juegoActual);
         }
-        return null;
     }
 
 
