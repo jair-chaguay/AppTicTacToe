@@ -127,7 +127,7 @@ public class TicTacToe implements Serializable {
     }
 
     public void cambiarJugador() {
-       
+
         if (jugadorActual == jugador1) {
             jugadorActual = jugador2;
         } else {
@@ -211,7 +211,12 @@ public class TicTacToe implements Serializable {
     void finalizarJuego() {
         mostrarTablero();
         if (gameState == GameState.WIN_X || gameState == GameState.WIN_O) {
-            System.out.println("¡" + jugadorActual.getNombre() + " ha ganado!");
+            if (jugadorActual == null) {
+                System.out.println("¡" + "Maquina" + " ha ganado!");
+            } else {
+                System.out.println("¡" + jugadorActual.getNombre() + " ha ganado!");
+            }
+
         } else if (gameState == GameState.DRAW) {
             System.out.println("¡El juego ha terminado en empate!");
         }
@@ -228,8 +233,16 @@ public class TicTacToe implements Serializable {
     //LLENA  EL TXT
     public void guardarJuego(String archivo) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/" + archivo, true))) {
-            writer.write(jugador1.getNombre() + "/" + jugador1.getSimbolo() + "/");
-            writer.write(jugador2.getNombre() + "/" + jugador2.getSimbolo() + "/");
+            if (jugador1.getNombre() == null) {
+                writer.write("Maquina" + "/" + jugador1.getSimbolo() + "/");
+                writer.write(jugador2.getNombre() + "/" + jugador2.getSimbolo() + "/");
+            } else if (jugador2.getNombre() == null) {
+                writer.write(jugador1.getNombre() + "/" + jugador1.getSimbolo() + "/");
+                writer.write("Maquina" + "/" + jugador2.getSimbolo() + "/");
+            } else {
+                writer.write(jugador1.getNombre() + "/" + jugador1.getSimbolo() + "/");
+                writer.write(jugador2.getNombre() + "/" + jugador2.getSimbolo() + "/");
+            }
             for (GameSimbol[] fila : tablero) {
                 for (GameSimbol casilla : fila) {
                     writer.write(casilla.toString() + "/");

@@ -32,6 +32,8 @@ public class PlayController implements Initializable {
     @FXML
     private Pane background;
 
+    private boolean juegoFacil = false;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -87,15 +89,21 @@ public class PlayController implements Initializable {
 
     public void iniciarPartida(TicTacToe juego) {
         this.juego = juego;
-        MaquinaFacil mf = new MaquinaFacil(GameSimbol.O);
-        juego.mostrarTablero();
+
+        MaquinaFacil mf;
+
+        if (DificultadController.jugador1.getSimbolo() == GameSimbol.X) {
+            mf = new MaquinaFacil(GameSimbol.O);
+        } else {
+            mf = new MaquinaFacil(GameSimbol.X);
+        }
 
         mf.setJuegoActual(juego);
         mf.movimientosFacil(juego);
-        juego.cambiarJugador();
         actualizarTablero();
-
+        juego.cambiarJugador();
         mostrarResultadoDelJuego();
+        juegoFacil = true;
     }
 
     @FXML
@@ -139,6 +147,18 @@ public class PlayController implements Initializable {
                     asignarEquisOCirculo(imgView, obtenerImagenParaJugadorActual());
                     juego.verificarEstadoJuego();
                     mostrarResultadoDelJuego();
+                    //FACIL
+                    if (juegoFacil == true) {
+                        if (juego.getGameState() == GameState.NO_WINNER) {
+                            MaquinaFacil mf = new MaquinaFacil(GameSimbol.O);
+                            mf.setJuegoActual(juego);
+                            mf.movimientosFacil(juego);
+                            actualizarTablero();
+                            juego.cambiarJugador();
+                            mostrarResultadoDelJuego();
+                        }
+                    }
+                    //
                 } else {
                     System.out.println("Movimiento no válido. Intente nuevamente.");
                 }

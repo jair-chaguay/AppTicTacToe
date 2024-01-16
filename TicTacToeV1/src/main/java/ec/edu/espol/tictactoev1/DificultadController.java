@@ -66,10 +66,18 @@ public class DificultadController implements Initializable {
 
     @FXML
     private void nivelFacil(MouseEvent evt) {
-        Jugadorr jugador1 = new Jugadorr("Jugador1", GameSimbol.X);
-        Jugadorr jugador2 = new Jugadorr("Jugador2", GameSimbol.O);
+      
+        if (radioPrimero.isSelected()) {
+            jugador1 = new Jugadorr(GameSimbol.X);
+            jugador2 = new Jugadorr("Jugador2", GameSimbol.O);
+        } else {
+            jugador1 = new Jugadorr(GameSimbol.O);
+            jugador2 = new Jugadorr("Jugador2", GameSimbol.X);
+        }
+
         TicTacToe juego = new TicTacToe(jugador1, jugador2);
         cargarVista(juego);
+
     }
 
     private void cargarVista(TicTacToe juego) {

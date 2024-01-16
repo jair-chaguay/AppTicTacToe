@@ -30,13 +30,12 @@ public class MaquinaFacil extends Jugadorr {
             int[] movimiento = movimientosDisponibles.get(indiceAleatorio);
             juego.setSimbolo(movimiento[0], movimiento[1]);
 
-            //juego.mostrarTablero();
-
             juego.cambiarJugador();
-            movimientosFacil(juego);
+ 
+     
 
         } else {
-            System.out.println("No hay movimientos disponibles para la máquina.");
+            System.out.println("No hay movimientos disponibles");
         }
     }
     
