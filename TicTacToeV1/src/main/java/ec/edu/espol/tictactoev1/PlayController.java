@@ -3,6 +3,7 @@ package ec.edu.espol.tictactoev1;
 import ec.edu.espol.tictactoev1.clas.GameSimbol;
 import ec.edu.espol.tictactoev1.clas.GameState;
 import ec.edu.espol.tictactoev1.clas.Jugadorr;
+import ec.edu.espol.tictactoev1.clas.MaquinaFacil;
 import ec.edu.espol.tictactoev1.clas.TicTacToe;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -69,12 +70,32 @@ public class PlayController implements Initializable {
             }
             layoutY += (size + margin);
         }
+
     }
 
     @FXML
     private void guardarPartida(MouseEvent ev) {
         juego.guardarJuego("partidas.txt");
 
+    }
+
+    public void reanudarGuardado(TicTacToe juegoGuardado) {
+        this.juego = juegoGuardado;
+        actualizarTablero();
+        mostrarResultadoDelJuego();
+    }
+
+    public void iniciarPartida(TicTacToe juego) {
+        this.juego = juego;
+        MaquinaFacil mf = new MaquinaFacil(GameSimbol.O);
+        juego.mostrarTablero();
+
+        mf.setJuegoActual(juego);
+        mf.movimientosFacil(juego);
+        juego.cambiarJugador();
+        actualizarTablero();
+
+        mostrarResultadoDelJuego();
     }
 
     @FXML
@@ -116,7 +137,6 @@ public class PlayController implements Initializable {
                     juego.cambiarJugador();
 
                     asignarEquisOCirculo(imgView, obtenerImagenParaJugadorActual());
-
                     juego.verificarEstadoJuego();
                     mostrarResultadoDelJuego();
                 } else {
@@ -158,12 +178,6 @@ public class PlayController implements Initializable {
             alert.setContentText("¡El juego ha terminado en empate!");
             alert.show();
         }
-    }
-
-    public void reanudarGuardado(TicTacToe juegoGuardado) {
-        this.juego = juegoGuardado;
-        actualizarTablero();
-        mostrarResultadoDelJuego();
     }
 
     private void actualizarTablero() {

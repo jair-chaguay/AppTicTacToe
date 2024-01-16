@@ -6,24 +6,24 @@ package ec.edu.espol.tictactoev1;
 
 import ec.edu.espol.tictactoev1.clas.GameSimbol;
 import ec.edu.espol.tictactoev1.clas.Jugadorr;
+import ec.edu.espol.tictactoev1.clas.MaquinaFacil;
+import ec.edu.espol.tictactoev1.clas.TicTacToe;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author alexc
- */
 public class DificultadController implements Initializable {
 
- 
     @FXML
     private Button btnFacil;
 
@@ -43,6 +43,7 @@ public class DificultadController implements Initializable {
     private ToggleGroup eleccion;
 
     public static Jugadorr jugador1 = new Jugadorr();
+    public static Jugadorr jugador2 = new Jugadorr();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -53,7 +54,7 @@ public class DificultadController implements Initializable {
         btnDificil.setDisable(true);
 
     }
-    
+
     @FXML
     private void inicio(MouseEvent evt) {
         try {
@@ -63,25 +64,36 @@ public class DificultadController implements Initializable {
         }
     }
 
-    
     @FXML
-    private void nivelFacil(MouseEvent evt){
-        
-       
+    private void nivelFacil(MouseEvent evt) {
+        Jugadorr jugador1 = new Jugadorr("Jugador1", GameSimbol.X);
+        Jugadorr jugador2 = new Jugadorr("Jugador2", GameSimbol.O);
+        TicTacToe juego = new TicTacToe(jugador1, jugador2);
+        cargarVista(juego);
     }
-    
-    @FXML
-    private void nivelIntermedio(MouseEvent evt){
-    
-    }
-    
-    @FXML
-    private void nivelDificil(MouseEvent evt){
-    
+
+    private void cargarVista(TicTacToe juego) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Play.fxml"));
+            Parent root = loader.load();
+            PlayController playController = loader.getController();
+            playController.iniciarPartida(juego);
+
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+
+            Stage currentStage = (Stage) btnFacil.getScene().getWindow();
+            currentStage.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @FXML
     private void activarBotones(MouseEvent evt) {
+
         boolean isSelected = radioPrimero.isSelected() || radioSegundo.isSelected();
         btnFacil.setDisable(!isSelected);
         btnMedio.setDisable(!isSelected);

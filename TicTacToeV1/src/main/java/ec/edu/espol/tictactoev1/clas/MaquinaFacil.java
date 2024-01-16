@@ -1,15 +1,24 @@
 package ec.edu.espol.tictactoev1.clas;
 
-import Trees.Tree;
 import java.util.List;
 import java.util.Random;
 
 public class MaquinaFacil extends Jugadorr {
 
+    private TicTacToe juegoActual;
+
     public MaquinaFacil(GameSimbol simbol) {
         super(simbol);
         this.setNombre("Maquina facil");
 
+    }
+
+    public TicTacToe getJuegoActual() {
+        return juegoActual;
+    }
+
+    public void setJuegoActual(TicTacToe juegoActual) {
+        this.juegoActual = juegoActual;
     }
 
     public void movimientosFacil(TicTacToe juego) {
@@ -20,8 +29,17 @@ public class MaquinaFacil extends Jugadorr {
             int indiceAleatorio = random.nextInt(movimientosDisponibles.size());
             int[] movimiento = movimientosDisponibles.get(indiceAleatorio);
             juego.setSimbolo(movimiento[0], movimiento[1]);
+
+            //juego.mostrarTablero();
+
             juego.cambiarJugador();
+            movimientosFacil(juego);
+
+        } else {
+            System.out.println("No hay movimientos disponibles para la máquina.");
         }
     }
+    
+    
 
 }

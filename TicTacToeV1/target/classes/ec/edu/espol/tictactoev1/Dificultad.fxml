@@ -23,17 +23,17 @@
             </Label>
             <VBox alignment="TOP_CENTER" prefHeight="167.0" prefWidth="372.0" spacing="20.0">
                <children>
-                  <Button fx:id="btnFacil" mnemonicParsing="false" onMouseClicked="#jugar" prefHeight="35.0" prefWidth="232.0" style="-fx-background-color: #04AA6D; -fx-border-color: white;" text="FÁCIL" textFill="WHITE">
+                  <Button fx:id="btnFacil" mnemonicParsing="false" onMouseClicked="#nivelFacil" prefHeight="35.0" prefWidth="232.0" style="-fx-background-color: #04AA6D; -fx-border-color: white;" text="FÁCIL" textFill="WHITE">
                      <font>
                         <Font name="Microsoft PhagsPa Bold" size="17.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnMedio" mnemonicParsing="false" onMouseClicked="#jugar" prefHeight="35.0" prefWidth="232.0" style="-fx-background-color: #ff9800; -fx-border-color: white;" text="MEDIO" textFill="WHITE">
+                  <Button fx:id="btnMedio" mnemonicParsing="false" onMouseClicked="#nivelFacil" prefHeight="35.0" prefWidth="232.0" style="-fx-background-color: #ff9800; -fx-border-color: white;" text="MEDIO" textFill="WHITE">
                      <font>
                         <Font name="Microsoft PhagsPa Bold" size="17.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnDificil" mnemonicParsing="false" onMouseClicked="#jugar" prefHeight="35.0" prefWidth="232.0" style="-fx-background-color: #f44336; -fx-border-color: white;" text="DIFÍCIL" textFill="WHITE">
+                  <Button fx:id="btnDificil" mnemonicParsing="false" onMouseClicked="#nivelFacil" prefHeight="35.0" prefWidth="232.0" style="-fx-background-color: #f44336; -fx-border-color: white;" text="DIFÍCIL" textFill="WHITE">
                      <font>
                         <Font name="Microsoft PhagsPa Bold" size="17.0" />
                      </font>

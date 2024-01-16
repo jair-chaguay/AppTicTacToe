@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ec.edu.espol.tictactoev1.clas;
 
 import java.io.BufferedReader;
@@ -19,10 +15,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- *
- * @author alexc
- */
 public class TicTacToe implements Serializable {
 
     private GameSimbol[][] tablero;
@@ -48,7 +40,7 @@ public class TicTacToe implements Serializable {
         this.gameState = GameState.NO_WINNER;
 
     }
-    
+
     public TicTacToe(Jugadorr jugador1, MaquinaFacil jugador2) {
         this.jugador1 = jugador1;
         this.jugador2 = jugador2;
@@ -135,6 +127,7 @@ public class TicTacToe implements Serializable {
     }
 
     public void cambiarJugador() {
+       
         if (jugadorActual == jugador1) {
             jugadorActual = jugador2;
         } else {
