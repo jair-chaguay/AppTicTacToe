@@ -28,6 +28,7 @@ import javafx.stage.Stage;
 public class PlayController implements Initializable {
 
     public TicTacToe juego;
+    public static String dificultad;
 
     @FXML
     private ImageView imgJugador1;
@@ -49,8 +50,9 @@ public class PlayController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         juego = new TicTacToe(jugador1, jugador2);
-
         crearCuadros();
+        iniciarPartida(juego,dificultad);
+        
 
     }
 
@@ -124,23 +126,75 @@ public class PlayController implements Initializable {
     }
 
     public void iniciarPartida(TicTacToe juego, String nivel) {
-
-        TicTacToe juegoTmp = new TicTacToe(jugador1, jugador2);
-
         if (nivel.equals("facil")) {
-            movFacil(juegoTmp);
+            movFacil(juego);
+            juego.cambiarJugador();
         }
-
         if (nivel.equals("medio")) {
-            movMedio(juegoTmp);
+            movMedio(juego);
         }
         if (nivel.equals("dificil")) {
-            movDificil(juegoTmp);
+            movDificil(juego);
         }
+        juego.cambiarJugador();
         actualizarTablero();
-        juegoTmp.cambiarJugador();
-        mostrarResultadoDelJuego();
+        
     }
+    
+    private void eventPane(Pane p, ImageView imgView) {
+        p.setCursor(Cursor.HAND);
+
+        p.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            String[] coordenadas = p.getId().split(",");
+            int fila = Integer.parseInt(coordenadas[0]);
+            int columna = Integer.parseInt(coordenadas[1]);
+
+            if (juego.getGameState() == GameState.NO_WINNER) {
+                if (juego.setSimbolo(fila, columna)) {
+                    juego.cambiarJugador();
+
+                    asignarEquisOCirculo(imgView, obtenerImagenParaJugadorActual());
+                    juego.verificarEstadoJuego();
+                    mostrarResultadoDelJuego();
+                    
+                    //FACIL
+                    if (juegoFacil == true) {
+                        if (juego.getGameState() == GameState.NO_WINNER) {
+                            MaquinaFacil mf = new MaquinaFacil(GameSimbol.O);
+                            mf.setJuegoActual(juego);
+                            mf.movimientosFacil(juego);
+                            actualizarTablero();
+                            juego.cambiarJugador();
+                            mostrarResultadoDelJuego();
+                        }
+                    }
+                    
+                    //MEDIO
+                    if (juegoMedio == true) {
+                        if (juego.getGameState() == GameState.NO_WINNER) {
+                            //
+                        }
+                    }
+                    
+                    //DIFICIL
+                    if (juegoDificil == true) {
+                        if (juego.getGameState() == GameState.NO_WINNER) {
+                            MaquinaDificil md = new MaquinaDificil(GameSimbol.O);
+                            juego.realizarMovimiento(md.getBestMoveCoordenates());
+                            juego.realizarMovimiento();
+                            actualizarTablero();
+                            juego.cambiarJugador();
+                            mostrarResultadoDelJuego();
+                        }
+                    }
+
+                } else {
+                    System.out.println("Movimiento no válido. Intente nuevamente.");
+                }
+            }
+        });
+    }
+
 
     @FXML
     private void inicio(MouseEvent evt) {
@@ -173,57 +227,7 @@ public class PlayController implements Initializable {
         atras.setVisible(false);
     }
 
-    private void eventPane(Pane p, ImageView imgView) {
-        p.setCursor(Cursor.HAND);
-
-        p.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            String[] coordenadas = p.getId().split(",");
-            int fila = Integer.parseInt(coordenadas[0]);
-            int columna = Integer.parseInt(coordenadas[1]);
-
-            if (juego.getGameState() == GameState.NO_WINNER) {
-                if (juego.setSimbolo(fila, columna)) {
-                    juego.cambiarJugador();
-
-                    asignarEquisOCirculo(imgView, obtenerImagenParaJugadorActual());
-                    juego.verificarEstadoJuego();
-                    mostrarResultadoDelJuego();
-                    //FACIL
-                    if (juegoFacil == true) {
-                        if (juego.getGameState() == GameState.NO_WINNER) {
-                            MaquinaFacil mf = new MaquinaFacil(GameSimbol.O);
-                            mf.setJuegoActual(juego);
-                            mf.movimientosFacil(juego);
-                            actualizarTablero();
-                            juego.cambiarJugador();
-                            mostrarResultadoDelJuego();
-                        }
-                    }
-                    //MEDIO
-                    if (juegoMedio == true) {
-                        if (juego.getGameState() == GameState.NO_WINNER) {
-                            //
-                        }
-                    }
-                    //DIFICIL
-                    if (juegoDificil == true) {
-                        if (juego.getGameState() == GameState.NO_WINNER) {
-                            MaquinaDificil md = new MaquinaDificil(GameSimbol.O);
-                            juego.realizarMovimiento(md.getBestMoveCoordenates());
-                            juego.realizarMovimiento();
-                            actualizarTablero();
-                            juego.cambiarJugador();
-                            mostrarResultadoDelJuego();
-                        }
-                    }
-
-                } else {
-                    System.out.println("Movimiento no válido. Intente nuevamente.");
-                }
-            }
-        });
-    }
-
+    
     private String obtenerImagenParaJugadorActual() {
         if (juego.getJugadorActual().getSimbolo() == GameSimbol.X) {
             juego.cambiarJugador();

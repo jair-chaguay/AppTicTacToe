@@ -3,3 +3,4 @@ Jugador1/X/Jugador2/O/X/O/X/NONE/NONE/NONE/NONE/NONE/NONE/Jugador2/NO_WINNER
 Jugador1/X/Jugador2/O/X/O/X/X/O/NONE/NONE/NONE/NONE/Jugador2/NO_WINNER
 Jugador1/X/Jugador2/O/X/O/X/O/X/NONE/X/NONE/O/Jugador2/WIN_X
 Jugador1/X/Jugador2/O/X/X/O/O/NONE/NONE/NONE/NONE/NONE/Jugador1/NO_WINNER
+Jugador1/X/Jugador2/O/O/NONE/NONE/NONE/O/X/X/X/O/Jugador2/WIN_O

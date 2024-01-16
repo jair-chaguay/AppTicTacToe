@@ -40,9 +40,6 @@ public class DificultadController implements Initializable {
 
     @FXML
     private ToggleGroup eleccion;
-//
-    public static Jugadorr jugador1 = new Jugadorr();
-    public static Jugadorr jugador2 = new Jugadorr();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -65,48 +62,39 @@ public class DificultadController implements Initializable {
 
     @FXML
     private void nivelFacil(MouseEvent evt) {
+        
+        PlayController.dificultad = "facil";
 
-        TicTacToe juego = new TicTacToe(PlayController.jugador1, PlayController.jugador2);
-        cargarVista(juego, "facil");
-     
+        try {
+            App.setRoot("Play");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
     }
 
     @FXML
     private void nivelMedio(MouseEvent evt) {
+        PlayController.dificultad = "medio";
 
-        TicTacToe juego = new TicTacToe(PlayController.jugador1, PlayController.jugador2);
-        cargarVista(juego, "medio");
-
+        try {
+            App.setRoot("Play");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @FXML
     private void nivelDificil(MouseEvent evt) {
 
-        TicTacToe juego = new TicTacToe(PlayController.jugador1, PlayController.jugador2);
-        cargarVista(juego, "dificil");
-
-    }
-
-    private void cargarVista(TicTacToe juego, String nivel) {
+        PlayController.dificultad = "dificil";
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Play.fxml"));
-            Parent root = loader.load();
-            PlayController playController = loader.getController();
-            playController.iniciarPartida(juego, nivel);
-            playController.ocultar();
-            Stage currentStage = (Stage) btnFacil.getScene().getWindow();
-            currentStage.hide(); 
-            Stage stage = new Stage();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setOnCloseRequest(event -> {
-                currentStage.show(); 
-            });
-            stage.show();
+            App.setRoot("Play");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
+
 
     @FXML
     private void activarBotones(MouseEvent evt) {
@@ -118,10 +106,10 @@ public class DificultadController implements Initializable {
 
         if (isSelected) {
             if (radioPrimero.isSelected()) {
-                jugador1 = new Jugadorr(GameSimbol.X);
+                PlayController.jugador1 = new Jugadorr(GameSimbol.X);
             } else if (radioSegundo.isSelected()) {
-                jugador2 = new Jugadorr(GameSimbol.O);
-                
+                PlayController.jugador1 = new Jugadorr(GameSimbol.O);
+
             }
         }
     }
