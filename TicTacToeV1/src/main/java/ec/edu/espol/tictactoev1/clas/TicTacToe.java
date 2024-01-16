@@ -1,22 +1,13 @@
 package ec.edu.espol.tictactoev1.clas;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class TicTacToe implements Serializable {
-    
+public class TicTacToe {
 
     private GameSimbol[][] tablero;
     private GameState gameState;
@@ -24,7 +15,6 @@ public class TicTacToe implements Serializable {
     private Jugadorr jugador2;
     private Jugadorr jugadorActual;
     private boolean partidaGuardada;
-   
 
     public TicTacToe(Jugadorr jugador1, Jugadorr jugador2) {
         this.jugador1 = jugador1;
@@ -112,6 +102,7 @@ public class TicTacToe implements Serializable {
     }
 
     static int c = 0;
+
     public void cambiarJugador() {
 //        System.out.println(c++);
         if (jugadorActual == jugador1) {
@@ -220,23 +211,16 @@ public class TicTacToe implements Serializable {
     public void guardarJuego(String archivo) {
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/" + archivo, true))) {
-            if (jugador1.getNombre() == null) {
-                writer.write("Maquina" + "/" + jugador1.getSimbolo() + "/");
-                writer.write(jugador2.getNombre() + "/" + jugador2.getSimbolo() + "/");
-            } else if (jugador2.getNombre() == null) {
-                writer.write(jugador1.getNombre() + "/" + jugador1.getSimbolo() + "/");
-                writer.write("Maquina" + "/" + jugador2.getSimbolo() + "/");
-            } else {
-                writer.write(jugador1.getNombre() + "/" + jugador1.getSimbolo() + "/");
-                writer.write(jugador2.getNombre() + "/" + jugador2.getSimbolo() + "/");
-            }
+            writer.write(jugador1.getNombre() + "/" + jugador1.getSimbolo() + "/");
+            writer.write(jugador2.getNombre() + "/" + jugador2.getSimbolo() + "/");
+
             for (GameSimbol[] fila : tablero) {
                 for (GameSimbol casilla : fila) {
                     writer.write(casilla.toString() + "/");
                 }
             }
             writer.write(jugadorActual.getNombre() + "/");
-            writer.write(gameState.toString());       
+            writer.write(gameState.toString());
             writer.newLine();
             writer.close();
 

@@ -30,6 +30,8 @@ public class PlayController implements Initializable {
     public TicTacToe juego;
     public static String dificultad = "";
     public static String turno = "";
+    public static String guardada = "no";
+    public static int numero = 0;
 
     @FXML
     private ImageView imgJugador1;
@@ -52,8 +54,12 @@ public class PlayController implements Initializable {
 
         juego = new TicTacToe(jugador1, jugador2);
         crearCuadros();
-        iniciarPartida(juego,dificultad);
-        
+        iniciarPartida(juego, dificultad);
+
+        if (numero!=0) {
+        reanudarGuardado(dificultad, numero);
+        }
+
     }
 
     @FXML
@@ -93,10 +99,16 @@ public class PlayController implements Initializable {
 
     }
 
-    public void reanudarGuardado(TicTacToe juegoGuardado) {
-        this.juego = juegoGuardado;
+    
+
+    public void reanudarGuardado(String nivel, int i) { 
+        if (guardada.equals("si")) { 
+            juego = GuardadasController.juegosGuardados.get(i);
+            actualizarTablero();
+            iniciarPartida(juego, nivel);
+            guardada = "";
+        }
         actualizarTablero();
-        mostrarResultadoDelJuego();
     }
 
     private void movFacil(TicTacToe juegoTmp) {
@@ -105,7 +117,7 @@ public class PlayController implements Initializable {
             mf.setJuegoActual(juegoTmp);
             mf.movimientosFacil(juegoTmp);
             juegoTmp.cambiarJugador();
-            
+
         }
         juegoFacil = true;
     }
@@ -116,7 +128,7 @@ public class PlayController implements Initializable {
             mi.setJuegoActual(juegoTmp);
             juegoTmp.realizarMovimiento(mi.movAleatorioMejor());
         }
-        
+
 //        juegoTmp.cambiarJugador();
         juegoMedio = true;
 
@@ -148,9 +160,9 @@ public class PlayController implements Initializable {
         }
 //        juego.cambiarJugador();
         actualizarTablero();
-        
+
     }
-    
+
     private void eventPane(Pane p, ImageView imgView) {
         p.setCursor(Cursor.HAND);
 
@@ -166,7 +178,7 @@ public class PlayController implements Initializable {
                     asignarEquisOCirculo(imgView, obtenerImagenParaJugadorActual());
                     juego.verificarEstadoJuego();
                     mostrarResultadoDelJuego();
-                    
+
                     //FACIL
                     if (juegoFacil) {
                         if (juego.getGameState() == GameState.NO_WINNER) {
@@ -178,11 +190,11 @@ public class PlayController implements Initializable {
                             mostrarResultadoDelJuego();
                         }
                     }
-                    
+
                     //MEDIO
                     if (juegoMedio) {
                         if (juego.getGameState() == GameState.NO_WINNER) {
-                            MaquinaIntermedia mi; 
+                            MaquinaIntermedia mi;
                             if (turno.equals("primero")) {
                                 mi = new MaquinaIntermedia(GameSimbol.O);
                             } else {
@@ -190,24 +202,24 @@ public class PlayController implements Initializable {
                             }
                             mi.setJuegoActual(juego);
                             juego.realizarMovimiento(mi.movAleatorioMejor());
-                            actualizarTablero(); 
+                            actualizarTablero();
                             mostrarResultadoDelJuego();
-                        } 
+                        }
                     }
-                    
+
                     //DIFICIL
                     if (juegoDificil) {
                         if (juego.getGameState() == GameState.NO_WINNER) {
-                            MaquinaDificil md; 
+                            MaquinaDificil md;
                             if (turno.equals("primero")) {
                                 md = new MaquinaDificil(GameSimbol.O);
                             } else {
                                 md = new MaquinaDificil(GameSimbol.X);
                             }
-                            
+
                             md.setJuegoActual(juego);
                             juego.realizarMovimiento(md.getBestMoveCoordenates());
-                            actualizarTablero();                            
+                            actualizarTablero();
                             mostrarResultadoDelJuego();
                         }
                     }
@@ -218,7 +230,6 @@ public class PlayController implements Initializable {
             }
         });
     }
-
 
     @FXML
     private void inicio(MouseEvent evt) {
@@ -234,14 +245,14 @@ public class PlayController implements Initializable {
                 juegoDificil = false;
                 dificultad = "";
                 turno = "";
-                try {                   
+                try {
                     App.setRoot("Inicio");
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
             } else {
                 alert.close();
-            }           
+            }
         } else {
             juegoFacil = false;
             juegoMedio = false;
@@ -256,12 +267,6 @@ public class PlayController implements Initializable {
         }
     }
 
-    public void ocultar() {
-
-        atras.setVisible(false);
-    }
-
-    
     private String obtenerImagenParaJugadorActual() {
         if (juego.getJugadorActual().getSimbolo() == GameSimbol.X) {
             juego.cambiarJugador();

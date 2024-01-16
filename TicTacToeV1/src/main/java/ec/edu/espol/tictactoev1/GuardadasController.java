@@ -12,28 +12,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author alexc
- */
+
+
 public class GuardadasController implements Initializable {
 
     public static List<TicTacToe> juegosGuardados = new ArrayList();
+    
 
     @FXML
     private ScrollPane medioSP;
@@ -48,6 +39,7 @@ public class GuardadasController implements Initializable {
         System.out.println(juegosGuardados.size());
         crearContenedores(juegosGuardados);
         labelCantidad.setText(String.valueOf(juegosGuardados.size()));
+        
 
     }
 
@@ -74,6 +66,8 @@ public class GuardadasController implements Initializable {
         contenedorPartidas.setSpacing(10);
 
         for (int i = 0; i < lista.size(); i++) {
+            
+            final int indice = i;
 
             TicTacToe partida = lista.get(i);
             VBox contenedor = new VBox();
@@ -98,7 +92,7 @@ public class GuardadasController implements Initializable {
                     + partida.getGameState());
             contenedor.getChildren().addAll(etiquetaTitulo, etiquetaDetalle);
             contenedor.setOnMouseClicked(event -> {
-                reanudarPartida(partida);
+                reanudarPartida(partida, indice);
 
             });
             contenedorPartidas.getChildren().add(contenedor);
@@ -107,18 +101,12 @@ public class GuardadasController implements Initializable {
         medioSP.setContent(contenedorPartidas);
     }
 
-    private void reanudarPartida(TicTacToe juegoGuardado) {
+
+    private void reanudarPartida(TicTacToe juegoGuardado, int i) {
+        PlayController.numero = i;
+        PlayController.guardada = "si";
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Play.fxml"));
-            Parent root = loader.load();
-
-            PlayController playController = loader.getController();
-            playController.reanudarGuardado(juegoGuardado);
-
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) labelCantidad.getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
+            App.setRoot("Play");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -171,6 +159,7 @@ public class GuardadasController implements Initializable {
             }
             partida.setGameState(GameState.valueOf(datos[index + 1]));
             lista.add(partida);
+           
         }
 
         return lista;
