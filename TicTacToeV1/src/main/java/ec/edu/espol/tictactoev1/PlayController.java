@@ -56,8 +56,9 @@ public class PlayController implements Initializable {
         crearCuadros();
         iniciarPartida(juego, dificultad);
 
-        if (numero!=0) {
-        reanudarGuardado(dificultad, numero);
+        if (numero != 0) {
+            reanudarGuardado("facil", numero);
+            System.out.println(dificultad + "inicializando");
         }
 
     }
@@ -99,11 +100,10 @@ public class PlayController implements Initializable {
 
     }
 
-    
-
-    public void reanudarGuardado(String nivel, int i) { 
-        if (guardada.equals("si")) { 
+    public void reanudarGuardado(String nivel, int i) {
+        if (guardada.equals("si")) {
             juego = GuardadasController.juegosGuardados.get(i);
+            turno = "";
             actualizarTablero();
             iniciarPartida(juego, nivel);
             guardada = "";
@@ -113,10 +113,12 @@ public class PlayController implements Initializable {
 
     private void movFacil(TicTacToe juegoTmp) {
         if (turno.equals("segundo")) {
+            System.out.println("ModoFacil 2");
             MaquinaFacil mf = new MaquinaFacil(GameSimbol.O);
             mf.setJuegoActual(juegoTmp);
             mf.movimientosFacil(juegoTmp);
             juegoTmp.cambiarJugador();
+            actualizarTablero();
 
         }
         juegoFacil = true;
@@ -149,6 +151,7 @@ public class PlayController implements Initializable {
     public void iniciarPartida(TicTacToe juego, String nivel) {
         if (nivel.equals("facil")) {
             movFacil(juego);
+            System.out.println("modoFacilActivado");
 //            juegoFacil = true;
 //            juego.cambiarJugador();
         }
@@ -188,6 +191,7 @@ public class PlayController implements Initializable {
                             actualizarTablero();
                             juego.cambiarJugador();
                             mostrarResultadoDelJuego();
+                            System.out.println("MovimientoMaquina");
                         }
                     }
 
